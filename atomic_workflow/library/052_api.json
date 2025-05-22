@@ -1,0 +1,363 @@
+{
+    "1": {
+      "inputs": {
+        "context_expand_pixels": 20,
+        "context_expand_factor": 1,
+        "fill_mask_holes": true,
+        "blur_mask_pixels": 16,
+        "invert_mask": false,
+        "blend_pixels": 16,
+        "rescale_algorithm": "bicubic",
+        "mode": "ranged size",
+        "force_width": 512,
+        "force_height": 1024,
+        "rescale_factor": 1,
+        "min_width": 512,
+        "min_height": 512,
+        "max_width": 1536,
+        "max_height": 1536,
+        "padding": 32,
+        "image": [
+          "25",
+          0
+        ],
+        "mask": [
+          "25",
+          1
+        ],
+        "optional_context_mask": [
+          "25",
+          2
+        ]
+      },
+      "class_type": "InpaintCrop",
+      "_meta": {
+        "title": "✂️ Inpaint Crop"
+      }
+    },
+    "2": {
+      "inputs": {
+        "rescale_algorithm": "bislerp",
+        "stitch": [
+          "1",
+          0
+        ],
+        "inpainted_image": [
+          "15",
+          0
+        ]
+      },
+      "class_type": "InpaintStitch",
+      "_meta": {
+        "title": "✂️ Inpaint Stitch"
+      }
+    },
+    "3": {
+      "inputs": {
+        "image": "%%IMAGE1%%",
+        "upload": "image"
+      },
+      "class_type": "LoadImage",
+      "_meta": {
+        "title": "Load Image"
+      }
+    },
+    "7": {
+      "inputs": {
+        "images": [
+          "2",
+          0
+        ]
+      },
+      "class_type": "PreviewImage",
+      "_meta": {
+        "title": "Preview Image"
+      }
+    },
+    "11": {
+      "inputs": {
+        "text": "%%PROMPT1%%",
+        "clip": [
+          "29",
+          0
+        ]
+      },
+      "class_type": "CLIPTextEncode",
+      "_meta": {
+        "title": "CLIP Text Encode (Prompt) - Positive"
+      }
+    },
+    "12": {
+      "inputs": {
+        "text": "ugly, text, watermark",
+        "clip": [
+          "29",
+          0
+        ]
+      },
+      "class_type": "CLIPTextEncode",
+      "_meta": {
+        "title": "CLIP Text Encode (Prompt) - Negative"
+      }
+    },
+    "14": {
+      "inputs": {
+        "seed": 94636379920428,
+        "steps": 24,
+        "cfg": 1,
+        "sampler_name": "euler",
+        "scheduler": "beta",
+        "denoise": 0.7999999999999998,
+        "model": [
+          "27",
+          0
+        ],
+        "positive": [
+          "19",
+          0
+        ],
+        "negative": [
+          "19",
+          1
+        ],
+        "latent_image": [
+          "19",
+          2
+        ]
+      },
+      "class_type": "KSampler",
+      "_meta": {
+        "title": "KSampler"
+      }
+    },
+    "15": {
+      "inputs": {
+        "samples": [
+          "14",
+          0
+        ],
+        "vae": [
+          "30",
+          0
+        ]
+      },
+      "class_type": "VAEDecode",
+      "_meta": {
+        "title": "VAE Decode"
+      }
+    },
+    "19": {
+      "inputs": {
+        "noise_mask": true,
+        "positive": [
+          "11",
+          0
+        ],
+        "negative": [
+          "12",
+          0
+        ],
+        "pixels": [
+          "1",
+          1
+        ],
+        "mask": [
+          "1",
+          2
+        ],
+        "vae": [
+          "30",
+          0
+        ]
+      },
+      "class_type": "InpaintModelConditioning",
+      "_meta": {
+        "title": "InpaintModelConditioning"
+      }
+    },
+    "25": {
+      "inputs": {
+        "rescale_algorithm": "bicubic",
+        "mode": "ensure minimum size",
+        "min_width": 512,
+        "min_height": 1024,
+        "rescale_factor": 4,
+        "image": [
+          "3",
+          0
+        ],
+        "mask": [
+          "39",
+          0
+        ]
+      },
+      "class_type": "InpaintResize",
+      "_meta": {
+        "title": "✂️ Resize Image Before Inpainting"
+      }
+    },
+    "27": {
+      "inputs": {
+        "model": [
+          "37",
+          0
+        ]
+      },
+      "class_type": "DifferentialDiffusion",
+      "_meta": {
+        "title": "Differential Diffusion"
+      }
+    },
+    "28": {
+      "inputs": {
+        "MODEL": [
+          "33",
+          0
+        ],
+        "VAE": [
+          "30",
+          0
+        ],
+        "CLIP": [
+          "29",
+          0
+        ]
+      },
+      "class_type": "Anything Everywhere3",
+      "_meta": {
+        "title": "Anything Everywhere3"
+      }
+    },
+    "29": {
+      "inputs": {
+        "clip_name1": "ViT-L-14-TEXT-detail-improved-hiT-GmP-TE-only-HF.safetensors",
+        "clip_name2": "t5xxl_fp16.safetensors",
+        "type": "flux",
+        "device": "default"
+      },
+      "class_type": "DualCLIPLoader",
+      "_meta": {
+        "title": "DualCLIPLoader"
+      }
+    },
+    "30": {
+      "inputs": {
+        "vae_name": "ae.safetensors"
+      },
+      "class_type": "VAELoader",
+      "_meta": {
+        "title": "Load VAE"
+      }
+    },
+    "32": {
+      "inputs": {
+        "unet_name": "flux1-dev-fp8.safetensors",
+        "weight_dtype": "fp8_e4m3fn"
+      },
+      "class_type": "UNETLoader",
+      "_meta": {
+        "title": "Load Diffusion Model"
+      }
+    },
+    "33": {
+      "inputs": {
+        "max_shift": 1.8,
+        "base_shift": 0.3500000000000001,
+        "width": [
+          "36",
+          0
+        ],
+        "height": [
+          "36",
+          1
+        ],
+        "model": [
+          "32",
+          0
+        ]
+      },
+      "class_type": "ModelSamplingFlux",
+      "_meta": {
+        "title": "ModelSamplingFlux"
+      }
+    },
+    "34": {
+      "inputs": {
+        "seed": 471535846448658
+      },
+      "class_type": "Seed Everywhere",
+      "_meta": {
+        "title": "Seed Everywhere"
+      }
+    },
+    "35": {
+      "inputs": {
+        "guidance": 1.8,
+        "conditioning": [
+          "11",
+          0
+        ]
+      },
+      "class_type": "FluxGuidance",
+      "_meta": {
+        "title": "FluxGuidance"
+      }
+    },
+    "36": {
+      "inputs": {
+        "image": [
+          "25",
+          0
+        ]
+      },
+      "class_type": "Get Image Size",
+      "_meta": {
+        "title": "Get Image Size"
+      }
+    },
+    "37": {
+      "inputs": {
+        "max_shift": 1.15,
+        "base_shift": 0.5,
+        "width": [
+          "36",
+          0
+        ],
+        "height": [
+          "36",
+          1
+        ],
+        "model": [
+          "33",
+          0
+        ]
+      },
+      "class_type": "ModelSamplingFlux",
+      "_meta": {
+        "title": "ModelSamplingFlux"
+      }
+    },
+    "38": {
+      "inputs": {
+        "image": "%%MASK1%%",
+        "upload": "image"
+      },
+      "class_type": "LoadImage",
+      "_meta": {
+        "title": "Load Image"
+      }
+    },
+    "39": {
+      "inputs": {
+        "channel": "red",
+        "image": [
+          "38",
+          0
+        ]
+      },
+      "class_type": "ImageToMask",
+      "_meta": {
+        "title": "Convert Image to Mask"
+      }
+    }
+}

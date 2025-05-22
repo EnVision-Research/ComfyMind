@@ -1,0 +1,254 @@
+{
+  "1": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "2": {
+    "inputs": {
+      "preprocessor": "DepthAnythingV2Preprocessor",
+      "resolution": 1024,
+      "image": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "AIO_Preprocessor",
+    "_meta": {
+      "title": "AIO Aux Preprocessor"
+    }
+  },
+  "3": {
+    "inputs": {
+      "strength": 0.35000000000000003,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "14",
+        0
+      ],
+      "negative": [
+        "15",
+        0
+      ],
+      "control_net": [
+        "5",
+        0
+      ],
+      "image": [
+        "2",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "5": {
+    "inputs": {
+      "control_net_name": "FLUX.1/FLUX.1-dev-ControlNet-Union-Pro/diffusion_pytorch_model.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "10": {
+    "inputs": {
+      "unet_name": "flux1-schnell-Q4_K_S.gguf"
+    },
+    "class_type": "UnetLoaderGGUF",
+    "_meta": {
+      "title": "Unet Loader (GGUF)"
+    }
+  },
+  "11": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp8_e4m3fn.safetensors",
+      "type": "flux"
+    },
+    "class_type": "DualCLIPLoaderGGUF",
+    "_meta": {
+      "title": "DualCLIPLoader (GGUF)"
+    }
+  },
+  "12": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "13": {
+    "inputs": {
+      "seed": [
+        "27",
+        0
+      ],
+      "steps": 3,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "10",
+        0
+      ],
+      "positive": [
+        "14",
+        0
+      ],
+      "negative": [
+        "15",
+        0
+      ],
+      "latent_image": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "14": {
+    "inputs": {
+      "clip_l": "%%PROMPT1%%",
+      "t5xxl": "%%PROMPT1%%",
+      "guidance": 2.5,
+      "clip": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncodeFlux",
+    "_meta": {
+      "title": "CLIPTextEncodeFlux"
+    }
+  },
+  "15": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "16": {
+    "inputs": {
+      "samples": [
+        "13",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "19": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "23": {
+    "inputs": {
+      "seed": [
+        "27",
+        0
+      ],
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "10",
+        0
+      ],
+      "positive": [
+        "3",
+        0
+      ],
+      "negative": [
+        "3",
+        1
+      ],
+      "latent_image": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "25": {
+    "inputs": {
+      "samples": [
+        "23",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "26": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "25",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "27": {
+    "inputs": {
+      "value": 1234
+    },
+    "class_type": "INTConstant",
+    "_meta": {
+      "title": "Seed"
+    }
+  }
+}

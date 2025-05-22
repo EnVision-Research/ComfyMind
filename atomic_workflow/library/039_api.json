@@ -1,0 +1,57 @@
+{
+  "3": {
+    "inputs": {
+      "frame_rate": 12,
+      "loop_count": 0,
+      "filename_prefix": "AnimateDiff",
+      "format": "video/h265-mp4",
+      "pix_fmt": "yuv420p10le",
+      "crf": 22,
+      "save_metadata": true,
+      "pingpong": false,
+      "save_output": true,
+      "images": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": {
+      "title": "Video Combine"
+    }
+  },
+  "7": {
+    "inputs": {
+      "video": "%%VIDEO1%%",
+      "force_rate": 0,
+      "custom_width": 512,
+      "custom_height": 512,
+      "frame_load_cap": 0,
+      "skip_first_frames": 0,
+      "select_every_nth": 1,
+      "format": "AnimateDiff"
+    },
+    "class_type": "VHS_LoadVideo",
+    "_meta": {
+      "title": "Load Video (Upload)"
+    }
+  },
+  "10": {
+    "inputs": {
+      "ckpt_name": "rife47.pth",
+      "clear_cache_after_n_frames": 10,
+      "multiplier": 1,
+      "fast_mode": true,
+      "ensemble": true,
+      "scale_factor": 1,
+      "frames": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "RIFE VFI",
+    "_meta": {
+      "title": "RIFE VFI (recommend rife47 and rife49)"
+    }
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "17": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp16.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "双CLIP加载器"
+    }
+  },
+  "18": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "17",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "19": {
+    "inputs": {
+      "model": [
+        "31",
+        0
+      ]
+    },
+    "class_type": "DifferentialDiffusion",
+    "_meta": {
+      "title": "差异扩散DifferentialDiffusion"
+    }
+  },
+  "20": {
+    "inputs": {
+      "guidance": 50,
+      "conditioning": [
+        "32",
+        0
+      ]
+    },
+    "class_type": "FluxGuidance",
+    "_meta": {
+      "title": "Flux引导"
+    }
+  },
+  "21": {
+    "inputs": {
+      "noise_mask": false,
+      "positive": [
+        "20",
+        0
+      ],
+      "negative": [
+        "18",
+        0
+      ],
+      "vae": [
+        "33",
+        0
+      ],
+      "pixels": [
+        "26",
+        0
+      ],
+      "mask": [
+        "26",
+        1
+      ]
+    },
+    "class_type": "InpaintModelConditioning",
+    "_meta": {
+      "title": "内补模型条件"
+    }
+  },
+  "22": {
+    "inputs": {
+      "samples": [
+        "25",
+        0
+      ],
+      "vae": [
+        "33",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "23": {
+    "inputs": {
+      "width": [
+        "27",
+        0
+      ],
+      "height": [
+        "27",
+        1
+      ],
+      "x": [
+        "27",
+        0
+      ],
+      "y": 0,
+      "image": [
+        "22",
+        0
+      ]
+    },
+    "class_type": "ImageCrop",
+    "_meta": {
+      "title": "裁剪图像"
+    }
+  },
+  "24": {
+    "inputs": {
+      "images": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "25": {
+    "inputs": {
+      "seed": 4194866942,
+      "steps": 28,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "19",
+        0
+      ],
+      "positive": [
+        "21",
+        0
+      ],
+      "negative": [
+        "21",
+        1
+      ],
+      "latent_image": [
+        "21",
+        2
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "26": {
+    "inputs": {
+      "left": 0,
+      "top": 0,
+      "right": [
+        "27",
+        0
+      ],
+      "bottom": 0,
+      "feathering": 0,
+      "image": [
+        "30",
+        0
+      ]
+    },
+    "class_type": "ImagePadForOutpaint",
+    "_meta": {
+      "title": "外补画板"
+    }
+  },
+  "27": {
+    "inputs": {
+      "image": [
+        "30",
+        0
+      ]
+    },
+    "class_type": "ImageGenResolutionFromImage",
+    "_meta": {
+      "title": "Generation Resolution From Image"
+    }
+  },
+  "29": {
+    "inputs": {
+      "unet_name": "flux1-fill-dev.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "30": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Edit Image"
+    }
+  },
+  "31": {
+    "inputs": {
+      "lora_name": "portrait/portrait/comfyui_portrait_lora64.safetensors",
+      "strength_model": 1,
+      "model": [
+        "29",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoRA加载器（仅模型）"
+    }
+  },
+  "32": {
+    "inputs": {
+      "text": "%%PROMPT1%%",
+      "clip": [
+        "17",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "33": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  }
+}

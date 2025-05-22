@@ -1,0 +1,186 @@
+{
+    "4": {
+      "inputs": {
+        "ckpt_name": "cosxl_edit.safetensors"
+      },
+      "class_type": "CheckpointLoaderSimple",
+      "_meta": {
+        "title": "Checkpoint加载器（简易）"
+      }
+    },
+    "6": {
+      "inputs": {
+        "text": "%%PROMPT1%%",
+        "clip": [
+          "4",
+          1
+        ]
+      },
+      "class_type": "CLIPTextEncode",
+      "_meta": {
+        "title": "CLIP文本编码"
+      }
+    },
+    "7": {
+      "inputs": {
+        "text": "Blurred, messy, turbid, lowest resolution, worst quality, least details, extremely poor image quality, distorted structure, messy structure, broken image",
+        "clip": [
+          "4",
+          1
+        ]
+      },
+      "class_type": "CLIPTextEncode",
+      "_meta": {
+        "title": "CLIP文本编码"
+      }
+    },
+    "8": {
+      "inputs": {
+        "samples": [
+          "37:8",
+          0
+        ],
+        "vae": [
+          "4",
+          2
+        ]
+      },
+      "class_type": "VAEDecode",
+      "_meta": {
+        "title": "VAE解码"
+      }
+    },
+    "13": {
+      "inputs": {
+        "image": "%%IMAGE1%%",
+        "upload": "image"
+      },
+      "class_type": "LoadImage",
+      "_meta": {
+        "title": "加载图像"
+      }
+    },
+    "100": {
+      "inputs": {
+        "images": [
+          "8",
+          0
+        ]
+      },
+      "class_type": "PreviewImage",
+      "_meta": {
+        "title": "预览图像"
+      }
+    },
+    "37:0": {
+      "inputs": {
+        "sampler_name": "lcm"
+      },
+      "class_type": "KSamplerSelect",
+      "_meta": {
+        "title": "K采样器选择"
+      }
+    },
+    "37:1": {
+      "inputs": {
+        "noise_seed": 948931311242690
+      },
+      "class_type": "RandomNoise",
+      "_meta": {
+        "title": "随机噪波"
+      }
+    },
+    "37:3": {
+      "inputs": {
+        "scheduler": "karras",
+        "steps": 10,
+        "denoise": 1,
+        "model": [
+          "4",
+          0
+        ]
+      },
+      "class_type": "BasicScheduler",
+      "_meta": {
+        "title": "基本调度器"
+      }
+    },
+    "37:6": {
+      "inputs": {
+        "positive": [
+          "6",
+          0
+        ],
+        "negative": [
+          "7",
+          0
+        ],
+        "vae": [
+          "4",
+          2
+        ],
+        "pixels": [
+          "13",
+          0
+        ]
+      },
+      "class_type": "InstructPixToPixConditioning",
+      "_meta": {
+        "title": "InstructPixToPix条件"
+      }
+    },
+    "37:7": {
+      "inputs": {
+        "cfg_conds": 2,
+        "cfg_cond2_negative": 1.7,
+        "model": [
+          "4",
+          0
+        ],
+        "cond1": [
+          "37:6",
+          0
+        ],
+        "cond2": [
+          "37:6",
+          1
+        ],
+        "negative": [
+          "7",
+          0
+        ]
+      },
+      "class_type": "DualCFGGuider",
+      "_meta": {
+        "title": "双CFG引导器"
+      }
+    },
+    "37:8": {
+      "inputs": {
+        "noise": [
+          "37:1",
+          0
+        ],
+        "guider": [
+          "37:7",
+          0
+        ],
+        "sampler": [
+          "37:0",
+          0
+        ],
+        "sigmas": [
+          "37:3",
+          0
+        ],
+        "latent_image": [
+          "37:6",
+          2
+        ]
+      },
+      "class_type": "SamplerCustomAdvanced",
+      "_meta": {
+        "title": "自定义采样器（高级）"
+      }
+    }
+  }

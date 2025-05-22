@@ -1,0 +1,400 @@
+{
+  "10": {
+    "inputs": {
+      "unet_name": "flux1-schnell-Q4_K_S.gguf"
+    },
+    "class_type": "UnetLoaderGGUF",
+    "_meta": {
+      "title": "Unet Loader (GGUF)"
+    }
+  },
+  "11": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp8_e4m3fn.safetensors",
+      "type": "flux"
+    },
+    "class_type": "DualCLIPLoaderGGUF",
+    "_meta": {
+      "title": "DualCLIPLoader (GGUF)"
+    }
+  },
+  "12": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "13": {
+    "inputs": {
+      "seed": [
+        "27",
+        0
+      ],
+      "steps": 2,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "sgm_uniform",
+      "denoise": 1,
+      "model": [
+        "28",
+        0
+      ],
+      "positive": [
+        "14",
+        0
+      ],
+      "negative": [
+        "15",
+        0
+      ],
+      "latent_image": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "14": {
+    "inputs": {
+      "clip_l": "%%PROMPT1%%",
+      "t5xxl": "%%PROMPT1%%",
+      "guidance": 2,
+      "clip": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncodeFlux",
+    "_meta": {
+      "title": "CLIPTextEncodeFlux"
+    }
+  },
+  "15": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "16": {
+    "inputs": {
+      "samples": [
+        "13",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "19": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image (Cant change the resolution of the image here)"
+    }
+  },
+  "27": {
+    "inputs": {
+      "value": 57987127
+    },
+    "class_type": "INTConstant",
+    "_meta": {
+      "title": "Seed"
+    }
+  },
+  "28": {
+    "inputs": {
+      "max_shift": 1.15,
+      "base_shift": 0.5,
+      "width": 2048,
+      "height": 2048,
+      "model": [
+        "36",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingFlux",
+    "_meta": {
+      "title": "ModelSamplingFlux"
+    }
+  },
+  "36": {
+    "inputs": {
+      "lora_name": "flux/fluxRealismLora.safetensors",
+      "strength_model": 1,
+      "model": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoraLoaderModelOnly"
+    }
+  },
+  "47": {
+    "inputs": {
+      "filename_prefix": "latentupscale",
+      "images": [
+        "71:10",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "51": {
+    "inputs": {
+      "text1": "Interpolated Upscale ",
+      "text2": "Latent Upscale ",
+      "footer_height": 100,
+      "font_name": "Roboto-Regular.ttf",
+      "font_size": 65,
+      "mode": "dark",
+      "border_thickness": 20,
+      "image1": [
+        "71:12",
+        0
+      ],
+      "image2": [
+        "71:10",
+        0
+      ]
+    },
+    "class_type": "CR Simple Image Compare",
+    "_meta": {
+      "title": "📱 CR Simple Image Compare"
+    }
+  },
+  "56": {
+    "inputs": {
+      "text1": "Original",
+      "text2": "LI Upscaled",
+      "footer_height": 100,
+      "font_name": "Roboto-Regular.ttf",
+      "font_size": 65,
+      "mode": "dark",
+      "border_thickness": 20,
+      "image1": [
+        "16",
+        0
+      ],
+      "image2": [
+        "71:12",
+        0
+      ]
+    },
+    "class_type": "CR Simple Image Compare",
+    "_meta": {
+      "title": "📱 CR Simple Image Compare"
+    }
+  },
+  "71:0": {
+    "inputs": {
+      "value": 2
+    },
+    "class_type": "FloatConstant",
+    "_meta": {
+      "title": "Scale by  (Can change the resolution of the image, the final resolution is Resolution_set * Scale, e.g. default Resolution_set is 1024 * 1024, Scale set 2, so final resolution is 2048 * 2048)"
+    }
+  },
+  "71:1": {
+    "inputs": {
+      "value": 0.377
+    },
+    "class_type": "FloatConstant",
+    "_meta": {
+      "title": "Denoise Float Constant"
+    }
+  },
+  "71:2": {
+    "inputs": {
+      "ratio": 0.53,
+      "samples1": [
+        "71:9",
+        0
+      ],
+      "samples2": [
+        "71:6",
+        0
+      ]
+    },
+    "class_type": "LatentInterpolate",
+    "_meta": {
+      "title": "Latent Interpolate"
+    }
+  },
+  "71:6": {
+    "inputs": {
+      "upscale_method": "area",
+      "scale_by": [
+        "71:0",
+        0
+      ],
+      "samples": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "LatentUpscaleBy",
+    "_meta": {
+      "title": "Upscale Latent By"
+    }
+  },
+  "71:7": {
+    "inputs": {
+      "upscale_method": "lanczos",
+      "scale_by": [
+        "71:0",
+        0
+      ],
+      "image": [
+        "16",
+        0
+      ]
+    },
+    "class_type": "ImageScaleBy",
+    "_meta": {
+      "title": "Upscale Image By"
+    }
+  },
+  "71:8": {
+    "inputs": {
+      "seed": 12345,
+      "steps": 3,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "sgm_uniform",
+      "denoise": [
+        "71:1",
+        0
+      ],
+      "model": [
+        "28",
+        0
+      ],
+      "positive": [
+        "14",
+        0
+      ],
+      "negative": [
+        "15",
+        0
+      ],
+      "latent_image": [
+        "71:6",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "71:9": {
+    "inputs": {
+      "pixels": [
+        "71:7",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "71:10": {
+    "inputs": {
+      "samples": [
+        "71:8",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "Image VAE Decode"
+    }
+  },
+  "71:11": {
+    "inputs": {
+      "seed": 12345,
+      "steps": 3,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "sgm_uniform",
+      "denoise": [
+        "71:1",
+        0
+      ],
+      "model": [
+        "28",
+        0
+      ],
+      "positive": [
+        "14",
+        0
+      ],
+      "negative": [
+        "15",
+        0
+      ],
+      "latent_image": [
+        "71:2",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "71:12": {
+    "inputs": {
+      "samples": [
+        "71:11",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "Interpolated VAE Decode"
+    }
+  }
+}

@@ -1,0 +1,370 @@
+{
+  "1": {
+    "inputs": {
+      "image": "%%IMAGE2%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Edit Image"
+    }
+  },
+  "2": {
+    "inputs": {
+      "aspect_ratio": "original",
+      "proportional_width": 1,
+      "proportional_height": 1,
+      "fit": "letterbox",
+      "method": "lanczos",
+      "round_to_multiple": "8",
+      "scale_to_side": "height",
+      "scale_to_length": [
+        "23",
+        1
+      ],
+      "background_color": "#000000",
+      "image": [
+        "1",
+        0
+      ],
+      "mask": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "LayerUtility: ImageScaleByAspectRatio V2",
+    "_meta": {
+      "title": "LayerUtility: ImageScaleByAspectRatio V2"
+    }
+  },
+  "3": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Reference Image"
+    }
+  },
+  "4": {
+    "inputs": {
+      "unet_name": "flux1-fill-dev.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "5": {
+    "inputs": {
+      "mask": [
+        "2",
+        1
+      ]
+    },
+    "class_type": "MaskToImage",
+    "_meta": {
+      "title": "遮罩转换为图像"
+    }
+  },
+  "6": {
+    "inputs": {
+      "direction": "right",
+      "match_image_size": true,
+      "image1": [
+        "15",
+        0
+      ],
+      "image2": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "ImageConcanate",
+    "_meta": {
+      "title": "Image Concatenate"
+    }
+  },
+  "7": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp16.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "双CLIP加载器"
+    }
+  },
+  "8": {
+    "inputs": {
+      "channel": "red",
+      "image": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "ImageToMask",
+    "_meta": {
+      "title": "图像转换为遮罩"
+    }
+  },
+  "9": {
+    "inputs": {
+      "direction": "right",
+      "match_image_size": true,
+      "image1": [
+        "13",
+        0
+      ],
+      "image2": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "ImageConcanate",
+    "_meta": {
+      "title": "Image Concatenate"
+    }
+  },
+  "10": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "11": {
+    "inputs": {
+      "lora_name": "subject/comfyui_subject_lora16.safetensors",
+      "strength_model": 1,
+      "model": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoRA加载器（仅模型）"
+    }
+  },
+  "12": {
+    "inputs": {
+      "seed": 2072028954,
+      "steps": 28,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "17",
+        0
+      ],
+      "positive": [
+        "22",
+        0
+      ],
+      "negative": [
+        "22",
+        1
+      ],
+      "latent_image": [
+        "22",
+        2
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "13": {
+    "inputs": {
+      "width": [
+        "15",
+        1
+      ],
+      "height": [
+        "15",
+        2
+      ],
+      "batch_size": 1,
+      "color": 0
+    },
+    "class_type": "EmptyImage",
+    "_meta": {
+      "title": "空图像"
+    }
+  },
+  "14": {
+    "inputs": {
+      "text": "%%PROMPT1%%",
+      "clip": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "15": {
+    "inputs": {
+      "width": 0,
+      "height": [
+        "23",
+        1
+      ],
+      "interpolation": "nearest",
+      "method": "keep proportion",
+      "condition": "always",
+      "multiple_of": 0,
+      "image": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "ImageResize+",
+    "_meta": {
+      "title": "🔧 Image Resize"
+    }
+  },
+  "16": {
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "17": {
+    "inputs": {
+      "model": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "DifferentialDiffusion",
+    "_meta": {
+      "title": "差异扩散DifferentialDiffusion"
+    }
+  },
+  "18": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "19": {
+    "inputs": {
+      "width": [
+        "23",
+        0
+      ],
+      "height": [
+        "23",
+        1
+      ],
+      "x": [
+        "15",
+        1
+      ],
+      "y": 0,
+      "image": [
+        "16",
+        0
+      ]
+    },
+    "class_type": "ImageCrop",
+    "_meta": {
+      "title": "裁剪图像"
+    }
+  },
+  "20": {
+    "inputs": {
+      "guidance": 50,
+      "conditioning": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "FluxGuidance",
+    "_meta": {
+      "title": "Flux引导"
+    }
+  },
+  "21": {
+    "inputs": {
+      "images": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "22": {
+    "inputs": {
+      "noise_mask": false,
+      "positive": [
+        "20",
+        0
+      ],
+      "negative": [
+        "18",
+        0
+      ],
+      "vae": [
+        "10",
+        0
+      ],
+      "pixels": [
+        "6",
+        0
+      ],
+      "mask": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "InpaintModelConditioning",
+    "_meta": {
+      "title": "内补模型条件"
+    }
+  },
+  "23": {
+    "inputs": {
+      "image": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "ImageGenResolutionFromImage",
+    "_meta": {
+      "title": "Generation Resolution From Image"
+    }
+  }
+}

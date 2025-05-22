@@ -1,0 +1,92 @@
+{
+  "1": {
+    "inputs": {
+      "model_name": "sam_vit_h (2.56GB)"
+    },
+    "class_type": "SAMModelLoader (segment anything)",
+    "_meta": {
+      "title": "SAMModelLoader (segment anything)"
+    }
+  },
+  "2": {
+    "inputs": {
+      "model_name": "GroundingDINO_SwinB (938MB)"
+    },
+    "class_type": "GroundingDinoModelLoader (segment anything)",
+    "_meta": {
+      "title": "GroundingDinoModelLoader (segment anything)"
+    }
+  },
+  "4": {
+    "inputs": {
+      "masks": [
+        "24",
+        1
+      ]
+    },
+    "class_type": "Mask Invert",
+    "_meta": {
+      "title": "Mask Invert"
+    }
+  },
+  "5": {
+    "inputs": {
+      "image": [
+        "7",
+        0
+      ],
+      "alpha": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "JoinImageWithAlpha",
+    "_meta": {
+      "title": "合并图像Alpha"
+    }
+  },
+  "6": {
+    "inputs": {
+      "images": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "7": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "24": {
+    "inputs": {
+      "prompt": "%%PROMPT1%%",
+      "threshold": 0.3,
+      "sam_model": [
+        "1",
+        0
+      ],
+      "grounding_dino_model": [
+        "2",
+        0
+      ],
+      "image": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "GroundingDinoSAMSegment (segment anything)",
+    "_meta": {
+      "title": "GroundingDinoSAMSegment (segment anything)"
+    }
+  }
+}

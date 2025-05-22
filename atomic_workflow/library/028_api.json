@@ -1,0 +1,290 @@
+{
+  "1": {
+    "inputs": {
+      "unet_name": "flux1-dev-fp8.safetensors",
+      "weight_dtype": "fp8_e4m3fn"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "2": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp8_e4m3fn.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "双CLIP加载器"
+    }
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "4": {
+    "inputs": {
+      "clip_l": [
+        "30",
+        0
+      ],
+      "t5xxl": [
+        "24",
+        0
+      ],
+      "guidance": 0.6000000000000001,
+      "clip": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncodeFlux",
+    "_meta": {
+      "title": "CLIP文本编码Flux"
+    }
+  },
+  "6": {
+    "inputs": {
+      "MODEL": [
+        "1",
+        0
+      ],
+      "CLIP": [
+        "2",
+        0
+      ],
+      "VAE": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "Anything Everywhere3",
+    "_meta": {
+      "title": "Anything Everywhere3"
+    }
+  },
+  "7": {
+    "inputs": {
+      "seed": [
+        "11",
+        0
+      ],
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "beta",
+      "denoise": 1,
+      "positive": [
+        "28",
+        0
+      ],
+      "negative": [
+        "8",
+        0
+      ],
+      "model": [
+        "1",
+        0
+      ],
+      "latent_image": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "8": {
+    "inputs": {
+      "conditioning": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "条件零化"
+    }
+  },
+  "9": {
+    "inputs": {
+      "dimensions": "1024 x 1024  (square)",
+      "clip_scale": 2,
+      "batch_size": 1
+    },
+    "class_type": "SDXL Empty Latent Image (rgthree)",
+    "_meta": {
+      "title": "SDXL Empty Latent Image (rgthree)"
+    }
+  },
+  "11": {
+    "inputs": {
+      "seed": 82661443722724
+    },
+    "class_type": "Seed (rgthree)",
+    "_meta": {
+      "title": "Seed (rgthree)"
+    }
+  },
+  "12": {
+    "inputs": {
+      "samples": [
+        "7",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "17": {
+    "inputs": {
+      "prompt": "%%PROMPT2%%"
+    },
+    "class_type": "CR Prompt Text",
+    "_meta": {
+      "title": "Style"
+    }
+  },
+  "19": {
+    "inputs": {
+      "prompt": "%%PROMPT1%%"
+    },
+    "class_type": "CR Prompt Text",
+    "_meta": {
+      "title": "Prompt Text"
+    }
+  },
+  "24": {
+    "inputs": {
+      "text1": [
+        "30",
+        0
+      ],
+      "text2": [
+        "19",
+        0
+      ],
+      "separator": ","
+    },
+    "class_type": "CR Text Concatenate",
+    "_meta": {
+      "title": "🔤 CR Text Concatenate"
+    }
+  },
+  "26": {
+    "inputs": {
+      "text": [
+        "30",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "27": {
+    "inputs": {
+      "guidance": 3.5,
+      "conditioning": [
+        "26",
+        0
+      ]
+    },
+    "class_type": "FluxGuidance",
+    "_meta": {
+      "title": "Flux引导"
+    }
+  },
+  "28": {
+    "inputs": {
+      "conditioning_to_strength": 0.15,
+      "conditioning_to": [
+        "27",
+        0
+      ],
+      "conditioning_from": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "ConditioningAverage",
+    "_meta": {
+      "title": "条件平均"
+    }
+  },
+  "30": {
+    "inputs": {
+      "prompt": [
+        "31",
+        0
+      ],
+      "find1": "style",
+      "replace1": [
+        "17",
+        0
+      ],
+      "find2": "",
+      "replace2": "",
+      "find3": "",
+      "replace3": ""
+    },
+    "class_type": "easy promptReplace",
+    "_meta": {
+      "title": "提示词替换"
+    }
+  },
+  "31": {
+    "inputs": {
+      "prompt": "(style: 2.0)"
+    },
+    "class_type": "CR Prompt Text",
+    "_meta": {
+      "title": "⚙️ CR Prompt Text"
+    }
+  },
+  "38": {
+    "inputs": {
+      "images": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "40": {
+    "inputs": {
+      "LATENT": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "Anything Everywhere",
+    "_meta": {
+      "title": "Anything Everywhere"
+    }
+  }
+}

@@ -1,0 +1,370 @@
+{
+  "1": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "2": {
+    "inputs": {
+      "model": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "DifferentialDiffusion",
+    "_meta": {
+      "title": "差异扩散DifferentialDiffusion"
+    }
+  },
+  "3": {
+    "inputs": {
+      "guidance": 50,
+      "conditioning": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "FluxGuidance",
+    "_meta": {
+      "title": "Flux引导"
+    }
+  },
+  "4": {
+    "inputs": {
+      "noise_mask": false,
+      "positive": [
+        "3",
+        0
+      ],
+      "negative": [
+        "1",
+        0
+      ],
+      "vae": [
+        "8",
+        0
+      ],
+      "pixels": [
+        "19",
+        0
+      ],
+      "mask": [
+        "18",
+        0
+      ]
+    },
+    "class_type": "InpaintModelConditioning",
+    "_meta": {
+      "title": "内补模型条件"
+    }
+  },
+  "5": {
+    "inputs": {
+      "lora_name": "portrait/portrait/comfyui_portrait_lora64.safetensors",
+      "strength_model": 1,
+      "model": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoRA加载器（仅模型）"
+    }
+  },
+  "6": {
+    "inputs": {
+      "unet_name": "flux1-fill-dev.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "7": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp16.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "双CLIP加载器"
+    }
+  },
+  "8": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "9": {
+    "inputs": {
+      "width": [
+        "17",
+        0
+      ],
+      "height": [
+        "17",
+        1
+      ],
+      "x": [
+        "12",
+        1
+      ],
+      "y": 0,
+      "image": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "ImageCrop",
+    "_meta": {
+      "title": "裁剪图像"
+    }
+  },
+  "10": {
+    "inputs": {
+      "samples": [
+        "16",
+        0
+      ],
+      "vae": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "11": {
+    "inputs": {
+      "images": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "12": {
+    "inputs": {
+      "width": 0,
+      "height": [
+        "17",
+        1
+      ],
+      "interpolation": "nearest",
+      "method": "keep proportion",
+      "condition": "always",
+      "multiple_of": 0,
+      "image": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "ImageResize+",
+    "_meta": {
+      "title": "🔧 Image Resize"
+    }
+  },
+  "13": {
+    "inputs": {
+      "width": [
+        "12",
+        1
+      ],
+      "height": [
+        "12",
+        2
+      ],
+      "batch_size": 1,
+      "color": 0
+    },
+    "class_type": "EmptyImage",
+    "_meta": {
+      "title": "空图像"
+    }
+  },
+  "14": {
+    "inputs": {
+      "aspect_ratio": "original",
+      "proportional_width": 1,
+      "proportional_height": 1,
+      "fit": "letterbox",
+      "method": "lanczos",
+      "round_to_multiple": "8",
+      "scale_to_side": "height",
+      "scale_to_length": [
+        "17",
+        1
+      ],
+      "background_color": "#000000",
+      "image": [
+        "21",
+        0
+      ],
+      "mask": [
+        "21",
+        1
+      ]
+    },
+    "class_type": "LayerUtility: ImageScaleByAspectRatio V2",
+    "_meta": {
+      "title": "LayerUtility: ImageScaleByAspectRatio V2"
+    }
+  },
+  "15": {
+    "inputs": {
+      "text": "%%PROMPT1%%",
+      "clip": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "16": {
+    "inputs": {
+      "seed": 136206164865024,
+      "steps": 28,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "2",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "4",
+        1
+      ],
+      "latent_image": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "17": {
+    "inputs": {
+      "image": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "ImageGenResolutionFromImage",
+    "_meta": {
+      "title": "Generation Resolution From Image"
+    }
+  },
+  "18": {
+    "inputs": {
+      "channel": "red",
+      "image": [
+        "22",
+        0
+      ]
+    },
+    "class_type": "ImageToMask",
+    "_meta": {
+      "title": "图像转换为遮罩"
+    }
+  },
+  "19": {
+    "inputs": {
+      "direction": "right",
+      "match_image_size": true,
+      "image1": [
+        "12",
+        0
+      ],
+      "image2": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "ImageConcanate",
+    "_meta": {
+      "title": "Image Concatenate"
+    }
+  },
+  "20": {
+    "inputs": {
+      "image": "%%IMAGE2%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Reference Image"
+    }
+  },
+  "21": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Reference Image"
+    }
+  },
+  "22": {
+    "inputs": {
+      "direction": "right",
+      "match_image_size": true,
+      "image1": [
+        "13",
+        0
+      ],
+      "image2": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "ImageConcanate",
+    "_meta": {
+      "title": "Image Concatenate"
+    }
+  },
+  "23": {
+    "inputs": {
+      "mask": [
+        "14",
+        1
+      ]
+    },
+    "class_type": "MaskToImage",
+    "_meta": {
+      "title": "遮罩转换为图像"
+    }
+  }
+}

@@ -1,0 +1,415 @@
+{
+  "20": {
+    "inputs": {
+      "guide_size": 512,
+      "guide_size_for": true,
+      "max_size": 1024,
+      "seed": 389951001999357,
+      "steps": 20,
+      "cfg": 5,
+      "sampler_name": "euler",
+      "scheduler": "sgm_uniform",
+      "denoise": 0.4,
+      "feather": 5,
+      "noise_mask": true,
+      "force_inpaint": true,
+      "wildcard": "",
+      "cycle": 1,
+      "inpaint_model": false,
+      "noise_mask_feather": 20,
+      "tiled_encode": false,
+      "tiled_decode": false,
+      "image": [
+        "58",
+        0
+      ],
+      "segs": [
+        "21",
+        0
+      ],
+      "model": [
+        "55",
+        0
+      ],
+      "clip": [
+        "36",
+        0
+      ],
+      "vae": [
+        "37",
+        0
+      ],
+      "positive": [
+        "51",
+        0
+      ],
+      "negative": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "DetailerForEach",
+    "_meta": {
+      "title": "Detailer (SEGS)"
+    }
+  },
+  "21": {
+    "inputs": {
+      "combined": false,
+      "crop_factor": 3,
+      "bbox_fill": false,
+      "drop_size": 10,
+      "contour_fill": false,
+      "mask": [
+        "32",
+        0
+      ]
+    },
+    "class_type": "MaskToSEGS",
+    "_meta": {
+      "title": "MASK to SEGS"
+    }
+  },
+  "23": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "36",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Negative - Leave Empty"
+    }
+  },
+  "25": {
+    "inputs": {
+      "text_input": "%%PROMPT1%%",
+      "task": "caption_to_phrase_grounding",
+      "fill_mask": true,
+      "keep_model_loaded": false,
+      "max_new_tokens": 1024,
+      "num_beams": 3,
+      "do_sample": true,
+      "output_mask_select": "",
+      "seed": 42,
+      "image": [
+        "58",
+        0
+      ],
+      "florence2_model": [
+        "68",
+        0
+      ]
+    },
+    "class_type": "Florence2Run",
+    "_meta": {
+      "title": "Florence2Run"
+    }
+  },
+  "28": {
+    "inputs": {
+      "model": "sam2_hiera_base_plus.safetensors",
+      "segmentor": "single_image",
+      "device": "cuda",
+      "precision": "bf16"
+    },
+    "class_type": "DownloadAndLoadSAM2Model",
+    "_meta": {
+      "title": "(Down)Load SAM2Model"
+    }
+  },
+  "29": {
+    "inputs": {
+      "keep_model_loaded": true,
+      "individual_objects": false,
+      "sam2_model": [
+        "28",
+        0
+      ],
+      "image": [
+        "58",
+        0
+      ],
+      "bboxes": [
+        "30",
+        1
+      ]
+    },
+    "class_type": "Sam2Segmentation",
+    "_meta": {
+      "title": "Sam2Segmentation"
+    }
+  },
+  "30": {
+    "inputs": {
+      "index": "0",
+      "batch": false,
+      "data": [
+        "25",
+        3
+      ]
+    },
+    "class_type": "Florence2toCoordinates",
+    "_meta": {
+      "title": "Florence2 Coordinates"
+    }
+  },
+  "31": {
+    "inputs": {
+      "mask_opacity": 1,
+      "mask_color": "100, 15, 240",
+      "pass_through": false,
+      "image": [
+        "58",
+        0
+      ],
+      "mask": [
+        "29",
+        0
+      ]
+    },
+    "class_type": "ImageAndMaskPreview",
+    "_meta": {
+      "title": "ImageAndMaskPreview"
+    }
+  },
+  "32": {
+    "inputs": {
+      "kernel_size": 10,
+      "sigma": 10,
+      "mask": [
+        "65",
+        0
+      ]
+    },
+    "class_type": "ImpactGaussianBlurMask",
+    "_meta": {
+      "title": "Gaussian Blur Mask"
+    }
+  },
+  "35": {
+    "inputs": {
+      "unet_name": "flux1-dev-fp8.safetensors",
+      "weight_dtype": "fp8_e4m3fn"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "36": {
+    "inputs": {
+      "clip_name1": "t5xxl_fp16.safetensors",
+      "clip_name2": "clip-vit-large-patch14/model.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "双CLIP加载器"
+    }
+  },
+  "37": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "38": {
+    "inputs": {
+      "text": "%%PROMPT2%%",
+      "clip": [
+        "62",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "40": {
+    "inputs": {
+      "mode": true,
+      "behavior": "Mute",
+      "value": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "ImpactControlBridge",
+    "_meta": {
+      "title": "Control Bridge"
+    }
+  },
+  "41": {
+    "inputs": {
+      "filename_prefix": "Flux\\Inpaint\\2025-03-10\\segs1_",
+      "images": [
+        "40",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "47": {
+    "inputs": {
+      "boolean": true,
+      "on_true": [
+        "29",
+        0
+      ],
+      "on_false": [
+        "48",
+        1
+      ]
+    },
+    "class_type": "Switch mask [Crystools]",
+    "_meta": {
+      "title": "🪛 Switch mask"
+    }
+  },
+  "48": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "51": {
+    "inputs": {
+      "guidance": 4,
+      "conditioning": [
+        "38",
+        0
+      ]
+    },
+    "class_type": "FluxGuidance",
+    "_meta": {
+      "title": "Flux引导"
+    }
+  },
+  "53": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "55": {
+    "inputs": {
+      "max_shift": 1,
+      "base_shift": 0.5,
+      "width": 1024,
+      "height": 1024,
+      "model": [
+        "60",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingFlux",
+    "_meta": {
+      "title": "采样算法（Flux）"
+    }
+  },
+  "58": {
+    "inputs": {
+      "boolean": true,
+      "image_a": [
+        "53",
+        0
+      ],
+      "image_b": [
+        "48",
+        0
+      ]
+    },
+    "class_type": "easy imageSwitch",
+    "_meta": {
+      "title": "Switch Image"
+    }
+  },
+  "59": {
+    "inputs": {
+      "lora_name": "flux/Detailer2K.safetensors",
+      "strength_model": 1,
+      "model": [
+        "35",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoRA加载器（仅模型）"
+    }
+  },
+  "60": {
+    "inputs": {
+      "lora_name": "flux/Add_More_details_Flux.safetensors",
+      "strength_model": 1,
+      "model": [
+        "59",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoRA加载器（仅模型）"
+    }
+  },
+  "62": {
+    "inputs": {
+      "q": 1.2,
+      "k": 1.1,
+      "v": 0.8,
+      "out": 1.25,
+      "clip": [
+        "36",
+        0
+      ]
+    },
+    "class_type": "CLIPAttentionMultiply",
+    "_meta": {
+      "title": "CLIP注意力相乘"
+    }
+  },
+  "65": {
+    "inputs": {
+      "expand": 0,
+      "tapered_corners": true,
+      "mask": [
+        "47",
+        0
+      ]
+    },
+    "class_type": "GrowMask",
+    "_meta": {
+      "title": "扩展遮罩"
+    }
+  },
+  "68": {
+    "inputs": {
+      "model": "microsoft/Florence-2-base",
+      "precision": "bf16",
+      "attention": "sdpa"
+    },
+    "class_type": "DownloadAndLoadFlorence2Model",
+    "_meta": {
+      "title": "DownloadAndLoadFlorence2Model"
+    }
+  }
+}

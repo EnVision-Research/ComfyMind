@@ -1,0 +1,437 @@
+{
+    "72": {
+      "inputs": {
+        "unet_name": "flux1-dev-fp8.safetensors",
+        "weight_dtype": "default"
+      },
+      "class_type": "UNETLoader",
+      "_meta": {
+        "title": "Load Diffusion Model"
+      }
+    },
+    "78": {
+      "inputs": {
+        "vae_name": "ae.safetensors"
+      },
+      "class_type": "VAELoader",
+      "_meta": {
+        "title": "Load VAE"
+      }
+    },
+    "83": {
+      "inputs": {
+        "seed": 470654733044790,
+        "steps": 20,
+        "cfg": 1,
+        "sampler_name": "euler",
+        "scheduler": "normal",
+        "denoise": 0.8,
+        "model": [
+          "107",
+          0
+        ],
+        "positive": [
+          "95",
+          0
+        ],
+        "negative": [
+          "95",
+          1
+        ],
+        "latent_image": [
+          "95",
+          2
+        ]
+      },
+      "class_type": "KSampler",
+      "_meta": {
+        "title": "KSampler"
+      }
+    },
+    "84": {
+      "inputs": {
+        "filename_prefix": "ComfyUI",
+        "images": [
+          "96",
+          0
+        ]
+      },
+      "class_type": "SaveImage",
+      "_meta": {
+        "title": "Save Image"
+      }
+    },
+    "87": {
+      "inputs": {
+        "image": "%%IMAGE1%%",
+        "upload": "image"
+      },
+      "class_type": "LoadImage",
+      "_meta": {
+        "title": "Load Image"
+      }
+    },
+    "88": {
+      "inputs": {
+        "samples": [
+          "83",
+          0
+        ],
+        "vae": [
+          "102",
+          0
+        ]
+      },
+      "class_type": "VAEDecode",
+      "_meta": {
+        "title": "VAE Decode"
+      }
+    },
+    "89": {
+      "inputs": {
+        "clip_name1": "clip_l.safetensors",
+        "clip_name2": "t5xxl_fp16.safetensors",
+        "type": "flux",
+        "device": "default"
+      },
+      "class_type": "DualCLIPLoader",
+      "_meta": {
+        "title": "DualCLIPLoader"
+      }
+    },
+    "90": {
+      "inputs": {
+        "clip_l": "%%PROMPT1%%, Realistic, High quality, 4K, 8K",
+        "t5xxl": "%%PROMPT1%%, Realistic, High quality, 4K, 8K",
+        "guidance": 3.5,
+        "clip": [
+          "89",
+          0
+        ]
+      },
+      "class_type": "CLIPTextEncodeFlux",
+      "_meta": {
+        "title": "CLIPTextEncodeFlux (Positive)"
+      }
+    },
+    "91": {
+      "inputs": {
+        "clip_l": "Overexposed, Blurred details, Subtitles, Overall gray, Worst quality, Low quality, JPEG compression residue, Ugly, Mutilated, Extra fingers, Badly drawn hands, Badly drawn faces, Deformed, Disfigured, Deformed limbs, Fused fingers, Three legs",
+        "t5xxl": "Overexposed, Blurred details, Subtitles, Overall gray, Worst quality, Low quality, JPEG compression residue, Ugly, Mutilated, Extra fingers, Badly drawn hands, Badly drawn faces, Deformed, Disfigured, Deformed limbs, Fused fingers, Three legs",
+        "guidance": 3.5,
+        "clip": [
+          "89",
+          0
+        ]
+      },
+      "class_type": "CLIPTextEncodeFlux",
+      "_meta": {
+        "title": "CLIPTextEncodeFlux (Negative)"
+      }
+    },
+    "94": {
+      "inputs": {
+        "context_expand_pixels": 20,
+        "context_expand_factor": 1,
+        "fill_mask_holes": true,
+        "blur_mask_pixels": 16,
+        "invert_mask": false,
+        "blend_pixels": 16,
+        "rescale_algorithm": "bicubic",
+        "mode": "ranged size",
+        "force_width": 1024,
+        "force_height": 1024,
+        "rescale_factor": 1,
+        "min_width": 512,
+        "min_height": 512,
+        "max_width": 768,
+        "max_height": 768,
+        "padding": 32,
+        "image": [
+          "108",
+          0
+        ],
+        "mask": [
+          "116",
+          0
+        ]
+      },
+      "class_type": "InpaintCrop",
+      "_meta": {
+        "title": "✂️ Inpaint Crop"
+      }
+    },
+    "95": {
+      "inputs": {
+        "noise_mask": true,
+        "positive": [
+          "90",
+          0
+        ],
+        "negative": [
+          "91",
+          0
+        ],
+        "vae": [
+          "100",
+          0
+        ],
+        "pixels": [
+          "94",
+          1
+        ],
+        "mask": [
+          "94",
+          2
+        ]
+      },
+      "class_type": "InpaintModelConditioning",
+      "_meta": {
+        "title": "InpaintModelConditioning"
+      }
+    },
+    "96": {
+      "inputs": {
+        "rescale_algorithm": "bislerp",
+        "stitch": [
+          "106",
+          0
+        ],
+        "inpainted_image": [
+          "88",
+          0
+        ]
+      },
+      "class_type": "InpaintStitch",
+      "_meta": {
+        "title": "✂️ Inpaint Stitch"
+      }
+    },
+    "97": {
+      "inputs": {
+        "value": [
+          "72",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "98": {
+      "inputs": {
+        "value": [
+          "97",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "99": {
+      "inputs": {
+        "value": [
+          "78",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "100": {
+      "inputs": {
+        "value": [
+          "99",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "101": {
+      "inputs": {
+        "value": [
+          "100",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "102": {
+      "inputs": {
+        "value": [
+          "101",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "103": {
+      "inputs": {
+        "value": [
+          "94",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "104": {
+      "inputs": {
+        "value": [
+          "103",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "105": {
+      "inputs": {
+        "value": [
+          "104",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "106": {
+      "inputs": {
+        "value": [
+          "105",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "107": {
+      "inputs": {
+        "value": [
+          "98",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "108": {
+      "inputs": {
+        "value": [
+          "87",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "109": {
+      "inputs": {
+        "value": [
+          "108",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "110": {
+      "inputs": {
+        "value": [
+          "109",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "111": {
+      "inputs": {
+        "value": [
+          "110",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "112": {
+      "inputs": {
+        "value": [
+          "111",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "113": {
+      "inputs": {
+        "value": [
+          "112",
+          0
+        ]
+      },
+      "class_type": "ReroutePrimitive|pysssss",
+      "_meta": {
+        "title": "Reroute Primitive 🐍"
+      }
+    },
+    "115": {
+      "inputs": {
+        "image": "%%MASK1%%",
+        "upload": "image"
+      },
+      "class_type": "LoadImage",
+      "_meta": {
+        "title": "Load Image"
+      }
+    },
+    "116": {
+      "inputs": {
+        "channel": "red",
+        "image": [
+          "115",
+          0
+        ]
+      },
+      "class_type": "ImageToMask",
+      "_meta": {
+        "title": "Convert Image to Mask"
+      }
+    }
+  }

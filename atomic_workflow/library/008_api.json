@@ -1,0 +1,162 @@
+{
+  "4": {
+    "inputs": {
+      "ckpt_name": "model_used_in_ComfyBench/dreamshaper_8.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "%%PROMPT1%%",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "illustration, painting, text, watermark, copyright, signature, notes",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Negative)"
+    }
+  },
+  "11": {
+    "inputs": {
+      "left": 256,
+      "top": 0,
+      "right": 256,
+      "bottom": 0,
+      "feathering": 0,
+      "image": [
+        "78",
+        0
+      ]
+    },
+    "class_type": "ImagePadForOutpaint",
+    "_meta": {
+      "title": "Pad Image for Outpainting"
+    }
+  },
+  "12": {
+    "inputs": {
+      "grow_mask_by": 16,
+      "pixels": [
+        "11",
+        0
+      ],
+      "vae": [
+        "70",
+        0
+      ],
+      "mask": [
+        "11",
+        1
+      ]
+    },
+    "class_type": "VAEEncodeForInpaint",
+    "_meta": {
+      "title": "VAE Encode (for Inpainting)"
+    }
+  },
+  "21": {
+    "inputs": {
+      "seed": 522497439372398,
+      "steps": 20,
+      "cfg": 7,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "25",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "23": {
+    "inputs": {
+      "samples": [
+        "21",
+        0
+      ],
+      "vae": [
+        "70",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "25": {
+    "inputs": {
+      "ckpt_name": "model_used_in_ComfyBench/dreamshaper_8Inpainting.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "70": {
+    "inputs": {
+      "vae_name": "vaeFtMse840000EmaPruned_vaeFtMse840k.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "78": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "79": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  }
+}

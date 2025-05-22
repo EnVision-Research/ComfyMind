@@ -1,0 +1,274 @@
+{
+    "236": {
+      "inputs": {
+        "text": "%%PROMPT1%%",
+        "clip": [
+          "277",
+          0
+        ]
+      },
+      "class_type": "CLIPTextEncode",
+      "_meta": {
+        "title": "CLIP Text Encode (Positive Prompt)"
+      }
+    },
+    "238": {
+      "inputs": {
+        "noise": [
+          "356",
+          0
+        ],
+        "guider": [
+          "344",
+          0
+        ],
+        "sampler": [
+          "348",
+          0
+        ],
+        "sigmas": [
+          "239",
+          0
+        ],
+        "latent_image": [
+          "351",
+          0
+        ]
+      },
+      "class_type": "SamplerCustomAdvanced",
+      "_meta": {
+        "title": "自定义采样器（高级）"
+      }
+    },
+    "239": {
+      "inputs": {
+        "scheduler": "simple",
+        "steps": 28,
+        "denoise": 1,
+        "model": [
+          "347",
+          0
+        ]
+      },
+      "class_type": "BasicScheduler",
+      "_meta": {
+        "title": "基本调度器"
+      }
+    },
+    "276": {
+      "inputs": {
+        "unet_name": "flux1-dev-fp8.safetensors",
+        "weight_dtype": "fp8_e4m3fn"
+      },
+      "class_type": "UNETLoader",
+      "_meta": {
+        "title": "UNet加载器"
+      }
+    },
+    "277": {
+      "inputs": {
+        "clip_name1": "t5xxl_fp16.safetensors",
+        "clip_name2": "clip_l.safetensors",
+        "type": "flux",
+        "device": "default"
+      },
+      "class_type": "DualCLIPLoader",
+      "_meta": {
+        "title": "双CLIP加载器"
+      }
+    },
+    "278": {
+      "inputs": {
+        "vae_name": "ae.safetensors"
+      },
+      "class_type": "VAELoader",
+      "_meta": {
+        "title": "加载VAE"
+      }
+    },
+    "284": {
+      "inputs": {
+        "model": [
+          "276",
+          0
+        ]
+      },
+      "class_type": "ConfigureModifiedFlux",
+      "_meta": {
+        "title": "Configure Modified Flux"
+      }
+    },
+    "301": {
+      "inputs": {
+        "samples": [
+          "238",
+          0
+        ],
+        "vae": [
+          "278",
+          0
+        ]
+      },
+      "class_type": "VAEDecode",
+      "_meta": {
+        "title": "VAE解码"
+      }
+    },
+    "343": {
+      "inputs": {
+        "text": "%%PROMPT2%%",
+        "clip": [
+          "277",
+          0
+        ]
+      },
+      "class_type": "CLIPTextEncode",
+      "_meta": {
+        "title": "CLIP Text Encode (Positive Prompt)"
+      }
+    },
+    "344": {
+      "inputs": {
+        "model": [
+          "347",
+          0
+        ],
+        "source_cond": [
+          "355",
+          0
+        ],
+        "target_cond": [
+          "354",
+          0
+        ]
+      },
+      "class_type": "FlowEditGuider",
+      "_meta": {
+        "title": "Flow Edit Guider"
+      }
+    },
+    "347": {
+      "inputs": {
+        "max_shift": 1.15,
+        "base_shift": 0.5,
+        "width": [
+          "366",
+          1
+        ],
+        "height": [
+          "366",
+          2
+        ],
+        "reverse_ode": true,
+        "model": [
+          "284",
+          0
+        ]
+      },
+      "class_type": "OutFluxModelSamplingPred",
+      "_meta": {
+        "title": "Outverse Flux Model Pred"
+      }
+    },
+    "348": {
+      "inputs": {
+        "skip_steps": 4,
+        "refine_steps": 0,
+        "seed": 1003356939110758
+      },
+      "class_type": "FlowEditSampler",
+      "_meta": {
+        "title": "Flow Edit Sampler"
+      }
+    },
+    "349": {
+      "inputs": {
+        "image": "%%IMAGE1%%",
+        "upload": "image"
+      },
+      "class_type": "LoadImage",
+      "_meta": {
+        "title": "加载图像"
+      }
+    },
+    "351": {
+      "inputs": {
+        "pixels": [
+          "366",
+          0
+        ],
+        "vae": [
+          "278",
+          0
+        ]
+      },
+      "class_type": "VAEEncode",
+      "_meta": {
+        "title": "VAE编码"
+      }
+    },
+    "354": {
+      "inputs": {
+        "guidance": 5.5,
+        "conditioning": [
+          "343",
+          0
+        ]
+      },
+      "class_type": "FluxGuidance",
+      "_meta": {
+        "title": "Flux引导"
+      }
+    },
+    "355": {
+      "inputs": {
+        "guidance": 1.5,
+        "conditioning": [
+          "236",
+          0
+        ]
+      },
+      "class_type": "FluxGuidance",
+      "_meta": {
+        "title": "Flux引导"
+      }
+    },
+    "356": {
+      "inputs": {},
+      "class_type": "DisableNoise",
+      "_meta": {
+        "title": "禁用噪波"
+      }
+    },
+    "363": {
+      "inputs": {
+        "filename_prefix": "ComfyUI",
+        "images": [
+          "301",
+          0
+        ]
+      },
+      "class_type": "SaveImage",
+      "_meta": {
+        "title": "保存图像"
+      }
+    },
+    "366": {
+      "inputs": {
+        "width": 1024,
+        "height": 1024,
+        "interpolation": "nearest",
+        "method": "keep proportion",
+        "condition": "always",
+        "multiple_of": 0,
+        "image": [
+          "349",
+          0
+        ]
+      },
+      "class_type": "ImageResize+",
+      "_meta": {
+        "title": "🔧 Image Resize"
+      }
+    }
+  }

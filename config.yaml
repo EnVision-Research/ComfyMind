@@ -1,0 +1,41 @@
+# ComfyUI configuration
+comfyui:
+  # Local ComfyUI server address
+  base_url: "http://127.0.0.1:8101" 
+  ws_base_url: "ws://127.0.0.1:8101"
+  # Directory for temporary storage of ComfyUI output
+  output_dir: "outputs/temp"
+  # Directory for storing atomic workflow
+  workflow_dir: "atomic_workflow/library"
+  # Path to workflow metadata description
+  workflow_meta_info_path: "atomic_workflow/meta_doc/Meta_Info.json"
+
+# Text completion LLM configuration
+completion:
+  base_url: "YOUR_COMPLETION_API_BASE_URL"
+  api_key: "YOUR_COMPLETION_API_KEY"
+  model_name: "YOUR_COMPLETION_MODEL_NAME"
+  hyper_parameter:
+    temperature: 0.0
+    top_p: 1.0
+
+# Vision LLM configuration
+vision:
+  base_url: "YOUR_VISION_API_BASE_URL"
+  api_key: "YOUR_VISION_API_KEY"
+  model_name: "YOUR_VISION_MODEL_NAME"
+  hyper_parameter:
+    temperature: 0.0
+    top_p: 1.0
+
+# Vision reasoning LLM configuration
+vision_reasoning:
+  base_url: "YOUR_VISION_REASONING_API_BASE_URL"
+  api_key: "YOUR_VISION_REASONING_API_KEY"
+  model_name: "YOUR_VISION_REASONING_MODEL_NAME"
+
+# Text reasoning LLM configuration
+text_reasoning:
+  base_url: "YOUR_TEXT_REASONING_API_BASE_URL"
+  api_key: "YOUR_TEXT_REASONING_API_KEY"
+  model_name: "YOUR_TEXT_REASONING_MODEL_NAME"

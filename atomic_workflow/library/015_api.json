@@ -1,0 +1,177 @@
+{
+  "4": {
+    "inputs": {
+      "ckpt_name": "model_used_in_ComfyBench/dreamshaper_8.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "5": {
+    "inputs": {
+      "width": [
+        "31",
+        0
+      ],
+      "height": [
+        "31",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "%%PROMPT1%%",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "horror,lowres, zombie,",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "17",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "Comfy",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "17": {
+    "inputs": {
+      "seed": 1013360800361449,
+      "steps": 27,
+      "cfg": 4,
+      "sampler_name": "dpmpp_2m_sde",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "26",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "26": {
+    "inputs": {
+      "strength": 0.8,
+      "conditioning": [
+        "6",
+        0
+      ],
+      "control_net": [
+        "27",
+        0
+      ],
+      "image": [
+        "32",
+        0
+      ]
+    },
+    "class_type": "ControlNetApply",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "27": {
+    "inputs": {
+      "control_net_name": "1.5/control_v11p_sd15_scribble_fp16.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "28": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "31": {
+    "inputs": {
+      "image": [
+        "28",
+        0
+      ]
+    },
+    "class_type": "GetImageSize+",
+    "_meta": {
+      "title": "🔧 Get Image Size"
+    }
+  },
+  "32": {
+    "inputs": {
+      "image": [
+        "28",
+        0
+      ]
+    },
+    "class_type": "ImageInvert",
+    "_meta": {
+      "title": "Invert Image"
+    }
+  }
+}

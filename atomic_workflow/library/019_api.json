@@ -1,0 +1,149 @@
+{
+  "4": {
+    "inputs": {
+      "ckpt_name": "model_used_in_ComfyBench/majicmixRealistic_v7.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "大模型"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "%%PROMPT1%%",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "正面提示词"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "lowres,zombie,horror,nsfw, ",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "负面提示词"
+    }
+  },
+  "11": {
+    "inputs": {
+      "guide_size": 384,
+      "guide_size_for": true,
+      "max_size": 1024,
+      "seed": 629334114724684,
+      "steps": 20,
+      "cfg": 4,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "denoise": 0.5,
+      "feather": 5,
+      "noise_mask": true,
+      "force_inpaint": true,
+      "bbox_threshold": 0.5,
+      "bbox_dilation": 10,
+      "bbox_crop_factor": 3,
+      "sam_detection_hint": "center-1",
+      "sam_dilation": 0,
+      "sam_threshold": 0.93,
+      "sam_bbox_expansion": 0,
+      "sam_mask_hint_threshold": 0.7000000000000001,
+      "sam_mask_hint_use_negative": "False",
+      "drop_size": 10,
+      "wildcard": "",
+      "cycle": 1,
+      "inpaint_model": false,
+      "noise_mask_feather": 0,
+      "image": [
+        "26",
+        0
+      ],
+      "model": [
+        "4",
+        0
+      ],
+      "clip": [
+        "4",
+        1
+      ],
+      "vae": [
+        "4",
+        2
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "bbox_detector": [
+        "18",
+        0
+      ],
+      "sam_model_opt": [
+        "19",
+        0
+      ],
+      "segm_detector_opt": [
+        "18",
+        1
+      ]
+    },
+    "class_type": "FaceDetailer",
+    "_meta": {
+      "title": "FaceDetailer"
+    }
+  },
+  "17": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "18": {
+    "inputs": {
+      "model_name": "bbox/face_yolov8m.pt"
+    },
+    "class_type": "UltralyticsDetectorProvider",
+    "_meta": {
+      "title": "UltralyticsDetectorProvider"
+    }
+  },
+  "19": {
+    "inputs": {
+      "model_name": "sam_vit_b_01ec64.pth",
+      "device_mode": "AUTO"
+    },
+    "class_type": "SAMLoader",
+    "_meta": {
+      "title": "SAMLoader (Impact)"
+    }
+  },
+  "26": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "要换脸的图片放这里"
+    }
+  }
+}

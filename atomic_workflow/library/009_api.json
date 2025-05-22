@@ -1,0 +1,64 @@
+{
+  "11": {
+    "inputs": {
+      "model_name": "4x-UltraSharp.pth"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Load Upscale Model"
+    }
+  },
+  "12": {
+    "inputs": {
+      "upscale_model": [
+        "11",
+        0
+      ],
+      "image": [
+        "31",
+        0
+      ]
+    },
+    "class_type": "ImageUpscaleWithModel",
+    "_meta": {
+      "title": "Upscale Image (using Model)"
+    }
+  },
+  "29": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "30",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "30": {
+    "inputs": {
+      "upscale_method": "bilinear",
+      "scale_by": 1.0,
+      "image": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "ImageScaleBy",
+    "_meta": {
+      "title": "Upscale Image By"
+    }
+  },
+  "31": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  }
+}

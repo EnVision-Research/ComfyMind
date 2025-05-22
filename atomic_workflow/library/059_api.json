@@ -1,0 +1,76 @@
+{
+  "1": {
+    "inputs": {
+      "model_name": "sam_vit_h (2.56GB)"
+    },
+    "class_type": "SAMModelLoader (segment anything)",
+    "_meta": {
+      "title": "SAMModelLoader (segment anything)"
+    }
+  },
+  "2": {
+    "inputs": {
+      "model_name": "GroundingDINO_SwinB (938MB)"
+    },
+    "class_type": "GroundingDinoModelLoader (segment anything)",
+    "_meta": {
+      "title": "GroundingDinoModelLoader (segment anything)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "24": {
+    "inputs": {
+      "prompt": "%%PROMPT1%%",
+      "threshold": 0.15,
+      "sam_model": [
+        "1",
+        0
+      ],
+      "grounding_dino_model": [
+        "2",
+        0
+      ],
+      "image": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "GroundingDinoSAMSegment (segment anything)",
+    "_meta": {
+      "title": "GroundingDinoSAMSegment (segment anything)"
+    }
+  },
+  "25": {
+    "inputs": {
+      "mask": [
+        "24",
+        1
+      ]
+    },
+    "class_type": "MaskToImage",
+    "_meta": {
+      "title": "Convert Mask to Image"
+    }
+  },
+  "26": {
+    "inputs": {
+      "images": [
+        "25",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  }
+}

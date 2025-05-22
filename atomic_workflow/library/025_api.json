@@ -1,0 +1,252 @@
+{
+  "1": {
+    "inputs": {
+      "images": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "2": {
+    "inputs": {
+      "model": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "DifferentialDiffusion",
+    "_meta": {
+      "title": "差异扩散DifferentialDiffusion"
+    }
+  },
+  "3": {
+    "inputs": {
+      "unet_name": "flux1-fill-dev.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "4": {
+    "inputs": {
+      "lora_name": "subject/comfyui_subject_lora16.safetensors",
+      "strength_model": 1,
+      "model": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoRA加载器（仅模型）"
+    }
+  },
+  "5": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp16.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "双CLIP加载器"
+    }
+  },
+  "6": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "7": {
+    "inputs": {
+      "guidance": 50,
+      "conditioning": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "FluxGuidance",
+    "_meta": {
+      "title": "Flux引导"
+    }
+  },
+  "8": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "9": {
+    "inputs": {
+      "noise_mask": false,
+      "positive": [
+        "7",
+        0
+      ],
+      "negative": [
+        "8",
+        0
+      ],
+      "vae": [
+        "6",
+        0
+      ],
+      "pixels": [
+        "14",
+        0
+      ],
+      "mask": [
+        "14",
+        1
+      ]
+    },
+    "class_type": "InpaintModelConditioning",
+    "_meta": {
+      "title": "内补模型条件"
+    }
+  },
+  "10": {
+    "inputs": {
+      "width": [
+        "15",
+        0
+      ],
+      "height": [
+        "15",
+        1
+      ],
+      "x": [
+        "15",
+        0
+      ],
+      "y": 0,
+      "image": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "ImageCrop",
+    "_meta": {
+      "title": "裁剪图像"
+    }
+  },
+  "11": {
+    "inputs": {
+      "samples": [
+        "13",
+        0
+      ],
+      "vae": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "12": {
+    "inputs": {
+      "text": "%%PROMPT1%%",
+      "clip": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "13": {
+    "inputs": {
+      "seed": 130441935101194,
+      "steps": 28,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "2",
+        0
+      ],
+      "positive": [
+        "9",
+        0
+      ],
+      "negative": [
+        "9",
+        1
+      ],
+      "latent_image": [
+        "9",
+        2
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "14": {
+    "inputs": {
+      "left": 0,
+      "top": 0,
+      "right": [
+        "15",
+        0
+      ],
+      "bottom": 0,
+      "feathering": 0,
+      "image": [
+        "16",
+        0
+      ]
+    },
+    "class_type": "ImagePadForOutpaint",
+    "_meta": {
+      "title": "外补画板"
+    }
+  },
+  "15": {
+    "inputs": {
+      "image": [
+        "16",
+        0
+      ]
+    },
+    "class_type": "ImageGenResolutionFromImage",
+    "_meta": {
+      "title": "Generation Resolution From Image"
+    }
+  },
+  "16": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Edit Image"
+    }
+  }
+}

@@ -1,0 +1,287 @@
+{
+    "001_api.json": {
+        "name": "001_api.json",  
+        "function": "This workflow implements a basic text-to-image generation pipeline using a stable diffusion model, fast but low quality. It requires text prompts to generate images.",  
+        "input_parameters": "prompt: 1, %%PROMPT1%%: representing desired feature prompt."  
+    },  
+    "002_api.json": { 
+        "name": "002_api.json",  
+        "function": "This workflow follows the text-to-video paradigm, generating a video from the provided text prompts, fast but low quality.",  
+        "input_parameters": "prompt: 1,  %%PROMPT1%%: describing the scene or content of the generated video."  
+    },  
+    "003_api.json": { 
+        "name": "003_api.json",  
+        "function": "This workflow follows the image-to-video paradigm, generating a video based on the input image, fast but low quality.",  
+        "input_parameters": "image: 1, %%IMAGE1%%: the reference image."  
+    },  
+    "004_api.json": {  
+        "name": "004_api.json",  
+        "function": "This workflow generates a new image based on the input image, retaining similar styles, colors, and objects.",  
+        "input_parameters": "image: 1, %%IMAGE1%%: the reference image; prompt: 1, %%PROMPT1%%: describing the desired content."  
+    },
+    "005_api.json": {
+        "name": "005_api.json",
+        "function": "This workflow is a powerful outpainting workflow. It can generate a new image from a prompt and the reference image. (High quality)",
+        "input_parameters": "prompt: 1, %%PROMPT1%%: The description of target image after outpainting. %%IMAGE1%%: The reference image waiting to be outpainted."
+    },     
+    "006_api.json": {
+        "name": "006_api.json",  
+        "function": "This workflow extracts the pose of characters from a reference image and generates a new image while maintaining the same pose.",  
+        "input_parameters": "image: 1, %%IMAGE1%%: the reference image; prompt: 1, %%PROMPT1%%: describing the desired content."  
+    },  
+    "007_api.json": {  
+        "name": "007_api.json",  
+        "function": "This workflow focus on Composition Generation. It generate images with multiple objects in specific locations.",  
+        "input_parameters": "prompt: 2, %%PROMPT1%%: descriptions of the one object, %%PROMPT2%%: descriptions of the one object."  
+    },  
+    "008_api.json": {  
+        "name": "008_api.json",  
+        "function": "This workflow extends the input image and generating new areas.",  
+        "input_parameters": "image: 1, %%IMAGE1%%: the input image; prompt: 1, %%PROMPT1%%: describing the desired content."  
+    },  
+    "009_api.json": {  
+        "name": "009_api.json",  
+        "function": "This workflow enlarges the input image by 2x, improving image quality.",  
+        "input_parameters": "image: 1, %%IMAGE1%%: the input image."  
+    },  
+    "010_api.json": {  
+        "name": "010_api.json",  
+        "function": "This workflow performs video frame interpolation to enhance the frame rate of a video.",  
+        "input_parameters": "video: 1, %%VIDEO1%%: the input video. Additional parameters must include the string:'Maintain the original video duration, set the resolution(custom_width, custom_height) equal to the original resolution. Set 'frame_rate' equal to the given videos frame_rate multiply by 'multiplier'. Set 'multiplier' equals to *Speed_Factor*, and Dont change scale_factor.' The *Speed_Factor* will be placed by the given instruction."  
+    },  
+    "011_api.json": {  
+        "name": "011_api.json",  
+        "function": "This workflow generates a blank black image and overlays text in any position and color. The background of the generated image can then be masked, and pasted onto another image.", 
+        "input_parameters": "prompt: 1, %%PROMPT1%%: the text to overlay. Additional parameters must include(These are not in tool_input, but in 'additional_requirements'):  justify chooose in['center', 'left', 'right']; Value choose in ['center', 'top', 'bottom'], 'font_color_hex': '#FFFFFF'"  
+    },  
+    "012_api.json": {  
+        "name": "012_api.json",  
+        "function": "This workflow removes the background from the input image, integrating the subject into a new scene.",  
+        "input_parameters": "image: 1, %%IMAGE1%% the subject image; prompt: 2, %%PROMPT1%% present the subject image, %%PROMPT2%% present the new scene."  
+    },  
+    "013_api.json": {  
+        "name": "013_api.json",  
+        "function": "This workflow aims to remove objects from an image.",  
+        "input_parameters": "image: 1, %%IMAGE1%% the input image; prompt: 1, %%PROMPT1%% specifying the object to be removed."  
+    },  
+    "014_api.json": {  
+        "name": "014_api.json",  
+        "function": "This workflow performs object replacement, requiring the input image and a description of the new object.",  
+        "input_parameters": "image: 1, %%IMAGE1%% the input image; prompt: 2, %%PROMPT1%% present the new object, %%PROMPT2%% present the object to be replaced."  
+    },  
+    "015_api.json": {  
+        "name": "015_api.json",  
+        "function": "This workflow generates high-quality images based on a sketch image and text prompts.",  
+        "input_parameters": "image: 1, %%IMAGE1%% the input sketch image; prompt: 1, %%PROMPT1%% describing the expected features."  
+    },  
+    "016_api.json": {  
+        "name": "016_api.json",  
+        "function": "This workflow refines an image while keeping the main structure intact and adjusting the details.",  
+        "input_parameters": "image: 1, %%IMAGE1%%: the input image; prompt: 2, %%PROMPT1%% present the original image, %%PROMPT2%% present the desired changes."  
+    },  
+    "017_api.json": {  
+        "name": "017_api.json",  
+        "function": "This workflow redraws a given image according to prompts, focusing on modifying shapes, colors, and themes.",  
+        "input_parameters": "image: 1, %%IMAGE1%%: the input image; prompt: 1, %%PROMPT1%% describing the expected changes."  
+    },  
+    "018_api.json": {  
+        "name": "018_api.json",  
+        "function": "This workflow performs face swapping between two images.",  
+        "input_parameters": "image: 2, %%IMAGE1%% present the source image, %%IMAGE2%% present the target image."  
+    },  
+    "019_api.json": {  
+        "name": "019_api.json",  
+        "function": "This workflow enhances character faces, generating high-quality output.",  
+        "input_parameters": "image: 1, %%IMAGE1%%: the input image; prompt: 1, %%PROMPT1%% describing the source image."  
+    },  
+    "020_api.json": {  
+        "name": "020_api.json",  
+        "function": "This workflow generates exquisite character portraits by applying poses and depth maps for guidance.",  
+        "input_parameters": "image: 1, %%IMAGE1%%: the input image; prompt: 1, %%PROMPT1%% describing the desired image."  
+    },
+    "021_api.json": {  
+        "name": "021_api.json",  
+        "function": "This workflow generates high-quality video from a given prompt but cost more time.",  
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing the desired video."  
+    },
+    "022_api.json": {  
+        "name": "022_api.json",  
+        "function": "This workflow generates high-quality video from a given image and prompt but cost more time.",  
+        "input_parameters": "image: 1, %%IMAGE1%%: the input image; prompt: 1, %%PROMPT1%%: describing the desired video."  
+    },
+    "023_api.json": {  
+        "name": "023_api.json",  
+        "function": "This workflow keep the portrait of the input image and change the other part according to the prompt. (High quality)",  
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing what you want to change and the object to replace it; image: 1, %%IMAGE1%%: the input image with portrait that you want to be constant."  
+    },
+    "024_api.json": {  
+        "name": "024_api.json",  
+        "function": "This workflow puts the portrait in %%IMAGE1%% into the mask area of ​​%%IMAGE2%% (​​%%IMAGE2%% must have a mask area)(High quality)",  
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing target image; image: 2, %%IMAGE1%% given the portrait, %%IMAGE2%% image must have a mask area, the mask area will be replaced by the portrait."  
+    },
+    "025_api.json": {  
+        "name": "025_api.json",  
+        "function": "This workflow keep the subject of the input image and change the other part according to the prompt. (e.g. Display a logo in other background) (High quality)",  
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing what you want to change and how to change; image: 1, %%IMAGE1%%: the input image with a subject that you want to be constant."  
+    },
+    "026_api.json": {  
+        "name": "026_api.json",  
+        "function": "This workflow puts the subject in %%IMAGE1%% into the mask area of ​​%%IMAGE2%% (​​%%IMAGE2%% must have a mask area)(High quality)",  
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing target image; image: 2, %%IMAGE1%% given the subject, %%IMAGE2%% image must have a mask area, the mask area will be replaced by the subject."  
+    },
+    "028_api.json": {  
+        "name": "028_api.json",  
+        "function": "This workflow can start from the beginning to generate a new image from a prompt with any style (Can *Not* transfer image style, no image can be input) (High quality) ATTENTION: This generated image has no contentrelationship with any previous image, it just a style reference image",  
+        "input_parameters": "prompt: 2, %%PROMPT1%% describing the content of the image, %%PROMPT2%% present the style of the image."  
+    },
+    "029_api.json": {  
+        "name": "029_api.json",  
+        "function": "This workflow can transfer the style of the reference image to another different input image (High quality) (The input must contain two different images. if style reference image is None, must generate one first)",  
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing the target image; image: 2, %%IMAGE1%% image wait to transfer style, %%IMAGE2%% style reference image."  
+    },
+    "030_api.json": {
+        "name": "030_api.json",
+        "function": "This workflow is a powerful depth generation workflow. It can generate a image according to the prompt and the depth map of the reference image. (High quality)",
+        "input_parameters": "prompt: 1, %%PROMPT1%%: The description of target image. %%IMAGE1%%: The reference image to deliver the depth map."
+    },
+    "031_api.json": {  
+        "name": "031_api.json",  
+        "function": "This workflow can generate a image from a prompt using newest T2I generation model (High quality)",  
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing the content of the image."  
+    },
+    "032_api.json": {  
+        "name": "032_api.json",  
+        "function": "This workflow can generate/edit a video from a video using newest V2V generation model (High quality)",  
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing how to edit the video; video: 1, %%VIDEO1%%: the input video."  
+    },
+    "033_api.json": {  
+        "name": "033_api.json",  
+        "function": "This workflow can optimize the detail of the object(and maintain the main object and background) specified by prompt",  
+        "input_parameters": "prompt: 2, %%PROMPT1%% describing the content to be replaced, %%PROMPT2%% present the target object; image: 1, %%IMAGE1%%: the input image."  
+    },
+    "034_api.json": {  
+        "name": "034_api.json",  
+        "function": "This workflow can inpaint the given mask-image(must exactly show the image have mask area). The masked-object/area will be repainted according to the prompt (High quality)",  
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing target image, specify the area to be inpainted; image: 1, %%IMAGE1%%: the input image with mask area."  
+    },
+    "035_api.json": {  
+        "name": "035_api.json",
+        "function": "This workflow can replace the specified object in the given image to another object based on the provided prompt. (High quality)",  
+        "input_parameters": "prompt: 2, %%PROMPT1%% present the object to be replaced, %%PROMPT2%% present the new object; image: 1, %%IMAGE1%%: the input image with the target object."  
+    },
+    "036_api.json": {  
+        "name": "036_api.json",
+        "function": "This workflow can generate a image *with mask area* according to the prompt. The masked-image can be as input image to inpaint the target object(The described object is covered by the mask area)",  
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing the objects that you want to cover(And then be replaced by the new object); image: 1, %%IMAGE1%%: the input image."  
+    },
+    "037_api.json": {  
+        "name": "037_api.json",
+        "function": "This workflow can generate a image *with mask background*. The masked-image can then be as input image to inpaint background (except for the described objects, all are covered by the mask)",  
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing the objects that you want to remain; image: 1, %%IMAGE1%%: the input image."  
+    },
+    "038_api.json": {  
+        "name": "038_api.json",  
+        "function": "This workflow aims to remove objects from an image. (High Quality)",  
+        "input_parameters": "image: 1, %%IMAGE1%%: the input image; prompt: 1, %%PROMPT1%%: specifying the object to be removed."  
+    },
+    "039_api.json": {
+        "name": "039_api.json",
+        "function": "This workflow can upscale the video.",
+        "input_parameters": "video: 1, %%VIDEO1%%: the input video. Additional parameters must include the string:'Maintain the original video duration, set frame rate(fps) equal to the given videos, set the resolution(custom_width, custom_height) equal to *Scale Factor* times of the original resolution. Dont change multiplier and scale_factor.' The *Scale Factor* will be placed by the given instruction."
+    },
+    "040_api.json": {
+        "name": "040_api.json",
+        "function": "This workflow is a general image editing workflow. It can edit a image according to the prompt. (High quality)",
+        "input_parameters": "image: 1, %%IMAGE1%%: the input image; prompt: 1, %%PROMPT1%%: The description of the original image. %%PROMPT2%%: The description of the target image."
+    },
+    "041_api.json": {
+        "name": "041_api.json",
+        "function": "This workflow is a fast general image editing workflow. It can edit a image according to the prompt. The workflow is sensitive to color, material, texture and property editing but can not significant change the layout of the original image. (High quality)",
+        "input_parameters": "image: 1, %%IMAGE1%%: the input image; prompt: 1, %%PROMPT1%%: The brief description of the target image."
+    },
+    "042_api.json": {
+        "name": "042_api.json",
+        "function": "This workflow is a powerful image transfer workflow. It can generate a new image from a prompt with the style of the reference image. (High quality)",
+        "input_parameters": "prompt: 2, %%PROMPT1%%: The description of the target image. %%IMAGE1%%: The style reference image."
+    },
+    "043_api.json": {
+        "name": "043_api.json",
+        "function": "This workflow is a powerful image transfer workflow. It can generate a new image from a prompt with the reference masked-image. Only the masked-area will be considered as the reference. (High quality)",
+        "input_parameters": "prompt: 2, %%PROMPT1%%: The description of the target image. %%IMAGE1%%: The masked-image as the style reference."
+    },
+    "044_api.json": {
+        "name": "044_api.json",
+        "function": "This workflow is a powerful object removal workflow. It can remove the specified object be masked from the input image. (High quality)",
+        "input_parameters": "prompt: 1, %%PROMPT1%%: The description of target image after removal. %%IMAGE1%%: The masked-image, the masked-area will be removed."
+    },
+    "045_api.json": {
+        "name": "045_api.json",
+        "function": "This workflow is a powerful image mixing workflow. It can mix two images and generate a new image. (High quality)",
+        "input_parameters": "%%IMAGE1%%: The reference image waiting to be mixed. %%IMAGE2%%: Another reference image waiting to be mixed."
+    },
+    "046_api.json": {
+        "name": "046_api.json",
+        "function": "This workflow is a powerful super-resolution generation workflow. It can generate a high-resolution(e.g. 2048*2048) image. (High quality)",
+        "input_parameters": "prompt: 1, %%PROMPT1%%: The description of target image."
+    },
+    "047_api.json": {
+        "name": "047_api.json",
+        "function": "This workflow is a powerful face swap workflow. It can swap the face of the image with the face of another reference image. (High quality)",
+        "input_parameters": "%%IMAGE1%%: The reference image with face waiting to be swapped. %%IMAGE2%%: reference image delivering the face."
+    },
+    "048_api.json": {  
+        "name": "048_api.json",  
+        "function": "This workflow can generate a image from a prompt using Stable Diffusion 3.5 T2I generation model (Relatively High quality)",  
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing the content of the image."  
+    },
+    "049_api.json": {
+        "name": "049_api.json",
+        "function": "This workflow is a workflow for Text to Image generation. It can first optimize the given prompt and generate an image according to the optimized prompt. (High quality)",
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing the content of the image."
+    },
+    "050_api.json": {
+        "name": "050_api.json",
+        "function": "This workflow is a workflow for Text to Image generation (Stable Diffusion 3.5). It can first optimize the given prompt and generate an image according to the optimized prompt. (High quality)",
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing the content of the image."
+    },
+    "051_api.json": {
+        "name": "051_api.json",
+        "function": "This workflow is a powerful inpainting workflow, especially suitable when the inpainting instruction is blurry, or when visual reasoning combined with a reference image is required to identify the object to be replaced. For example, if the instruction is to replace an item on a table without specifying what item is, visual reasoning is needed to determine the target to be replaced, making this workflow particularly appropriate. (Very High quality, adaptive)",
+        "input_parameters": "prompt: 1, %%PROMPT1%%: The original description of the instruction(No edit). %%IMAGE1%%: The original reference image."
+    },
+    "052_api.json": {
+        "name": "052_api.json",
+        "function": "This workflow is an powerful alternative workflow inpainting workflow, especially suitable when the inpainting instruction is blurry, or when visual reasoning combined with a reference image is required to identify the object to be replaced. For example, if the instruction is to replace an item on a table without specifying what item is, visual reasoning is needed to determine the target to be replaced, making this workflow particularly appropriate. (Fine quality, adaptive)",
+        "input_parameters": "prompt: 1, %%PROMPT1%%: The original description of the instruction(No edit). %%IMAGE1%%: The original reference image."
+    },
+    "053_api.json": {
+        "name": "053_api.json",
+        "function": "This workflow is an another powerful alternative workflow to the reason_inpainting.json. It is suitable when the inpainting instruction is blurry, or when visual reasoning combined with a reference image is required to identify the object to be replaced. For example, if the instruction is to replace an item on a table without specifying what item is, visual reasoning is needed to determine the target to be replaced, making this workflow particularly appropriate. But its inpainting border may have artifacts. (Common quality, adaptive)",
+        "input_parameters": "prompt: 1, %%PROMPT1%%: The original description of the instruction(No edit). %%IMAGE1%%: The original reference image."
+    },
+    "054_api.json": {
+        "name": "054_api.json",
+        "function": "This workflow is a powerful adaptive addition workflow. It can incorporate the layout and content of the input image and, based on user instructions, add or draw objects in specific regions. (Fine quality, adaptive)",
+        "input_parameters": "prompt: 1, %%PROMPT1%%: The original description of the instruction(No edit). %%IMAGE1%%: The original reference image."
+    },
+    "055_api.json": {
+        "name": "055_api.json",
+        "function": "This workflow is a powerful alternative adaptive addition workflow. It can incorporate the layout and content of the input image and, based on user instructions, add or draw objects in specific regions. (Common quality, adaptive)",
+        "input_parameters": "prompt: 1, %%PROMPT1%%: The original description of the instruction(No edit). %%IMAGE1%%: The original reference image."
+    },
+    "056_api.json": {
+        "name": "056_api.json",
+        "function": "This workflow is suitable when the removal instruction is blurry, or when visual reasoning combined with a reference image is required to identify the object to be removed. For example, if the instruction is to remove an item on a table without specifying what item is, visual reasoning is needed to determine the target to be removed, making this workflow particularly appropriate. (High quality, adaptive)",
+        "input_parameters": "prompt: 1, %%PROMPT1%%: The original description of the instruction(No edit). %%IMAGE1%%: The original reference image."
+    },
+    "057_api.json": {
+        "name": "057_api.json",
+        "function": "This workflow is a workflow for Reasoning Generation. It can first perform reasoning on the specific content to be generated, drawing upon common sense, scientific principles, and other relevant knowledge. Then generate the image based on the outcome of this reasoning (High quality)",
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing the content of the image."
+    },
+    "058_api.json": {
+        "name": "058_api.json",
+        "function": "This workflow is a workflow for Reasoning Generation (Stable Diffusion 3.5). It can first perform reasoning on the specific content to be generated, drawing upon common sense, scientific principles, and other relevant knowledge. Then generate the image based on the outcome of this reasoning (High quality)",
+        "input_parameters": "prompt: 1, %%PROMPT1%%: describing the content of the image."
+    }
+}

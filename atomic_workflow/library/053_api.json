@@ -1,0 +1,549 @@
+{
+  "1": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "4": {
+    "inputs": {
+      "image": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "GetImageSize+",
+    "_meta": {
+      "title": "🔧 Get Image Size"
+    }
+  },
+  "7": {
+    "inputs": {
+      "expand": 20,
+      "incremental_expandrate": 0,
+      "tapered_corners": true,
+      "flip_input": false,
+      "blur_radius": 10,
+      "lerp_alpha": 1,
+      "decay_factor": 1,
+      "fill_holes": false,
+      "mask": [
+        "109",
+        0
+      ]
+    },
+    "class_type": "GrowMaskWithBlur",
+    "_meta": {
+      "title": "Grow Mask With Blur"
+    }
+  },
+  "9": {
+    "inputs": {
+      "model": [
+        "33",
+        0
+      ]
+    },
+    "class_type": "DifferentialDiffusion",
+    "_meta": {
+      "title": "差异扩散DifferentialDiffusion"
+    }
+  },
+  "10": {
+    "inputs": {
+      "seed": 192696606462286,
+      "steps": 32,
+      "cfg": 4.5,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "9",
+        0
+      ],
+      "positive": [
+        "11",
+        0
+      ],
+      "negative": [
+        "11",
+        1
+      ],
+      "latent_image": [
+        "11",
+        2
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "11": {
+    "inputs": {
+      "noise_mask": true,
+      "positive": [
+        "13",
+        0
+      ],
+      "negative": [
+        "13",
+        1
+      ],
+      "vae": [
+        "33",
+        2
+      ],
+      "pixels": [
+        "32",
+        0
+      ],
+      "mask": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "InpaintModelConditioning",
+    "_meta": {
+      "title": "内补模型条件"
+    }
+  },
+  "12": {
+    "inputs": {
+      "control_net_name": "SDXL/diffusion_pytorch_model.fp16.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "加载ControlNet模型"
+    }
+  },
+  "13": {
+    "inputs": {
+      "strength": 0.4,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "14",
+        0
+      ],
+      "negative": [
+        "15",
+        0
+      ],
+      "control_net": [
+        "12",
+        0
+      ],
+      "image": [
+        "18",
+        0
+      ],
+      "vae": [
+        "33",
+        2
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "应用ControlNet（旧版高级）"
+    }
+  },
+  "14": {
+    "inputs": {
+      "text": "%%PROMPT1%%",
+      "clip": [
+        "33",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "15": {
+    "inputs": {
+      "text": "Colorful, Overexposed, Blurred details, Subtitles, Overall gray, Worst quality, Low quality, JPEG compression residue, Ugly, Mutilated, Extra fingers, Badly drawn hands, Badly drawn faces, Deformed, Disfigured, Deformed limbs, Fused fingers, Three legs",
+      "clip": [
+        "33",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "16": {
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "33",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "18": {
+    "inputs": {
+      "ckpt_name": "depth_anything_v2_vitl.pth",
+      "resolution": 512,
+      "image": [
+        "32",
+        0
+      ]
+    },
+    "class_type": "DepthAnythingV2Preprocessor",
+    "_meta": {
+      "title": "Depth Anything V2 - Relative"
+    }
+  },
+  "30": {
+    "inputs": {
+      "value": "round(a / 8)*8",
+      "a": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "SimpleMath+",
+    "_meta": {
+      "title": "🔧 Simple Math"
+    }
+  },
+  "31": {
+    "inputs": {
+      "value": "round(a / 8)*8",
+      "a": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "SimpleMath+",
+    "_meta": {
+      "title": "🔧 Simple Math"
+    }
+  },
+  "32": {
+    "inputs": {
+      "width": [
+        "30",
+        0
+      ],
+      "height": [
+        "31",
+        0
+      ],
+      "interpolation": "lanczos",
+      "method": "stretch",
+      "condition": "always",
+      "multiple_of": 0,
+      "image": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "ImageResize+",
+    "_meta": {
+      "title": "🔧 Image Resize"
+    }
+  },
+  "33": {
+    "inputs": {
+      "ckpt_name": "SDXL-TURBO/sd_xl_turbo_1.0_fp16.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Checkpoint加载器（简易）"
+    }
+  },
+  "43": {
+    "inputs": {
+      "expand": 20,
+      "incremental_expandrate": 0,
+      "tapered_corners": true,
+      "flip_input": false,
+      "blur_radius": 10,
+      "lerp_alpha": 1,
+      "decay_factor": 1,
+      "fill_holes": false,
+      "mask": [
+        "109",
+        0
+      ]
+    },
+    "class_type": "GrowMaskWithBlur",
+    "_meta": {
+      "title": "Grow Mask With Blur"
+    }
+  },
+  "44": {
+    "inputs": {
+      "model": [
+        "56",
+        0
+      ]
+    },
+    "class_type": "DifferentialDiffusion",
+    "_meta": {
+      "title": "差异扩散DifferentialDiffusion"
+    }
+  },
+  "45": {
+    "inputs": {
+      "seed": 38767163469727,
+      "steps": 32,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "44",
+        0
+      ],
+      "positive": [
+        "46",
+        0
+      ],
+      "negative": [
+        "46",
+        1
+      ],
+      "latent_image": [
+        "46",
+        2
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "46": {
+    "inputs": {
+      "noise_mask": true,
+      "positive": [
+        "48",
+        0
+      ],
+      "negative": [
+        "48",
+        1
+      ],
+      "vae": [
+        "57",
+        0
+      ],
+      "pixels": [
+        "32",
+        0
+      ],
+      "mask": [
+        "43",
+        0
+      ]
+    },
+    "class_type": "InpaintModelConditioning",
+    "_meta": {
+      "title": "内补模型条件"
+    }
+  },
+  "47": {
+    "inputs": {
+      "control_net_name": "FLUX.1/FLUX.1-dev-ControlNet-Union-Pro/diffusion_pytorch_model.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "加载ControlNet模型"
+    }
+  },
+  "48": {
+    "inputs": {
+      "strength": 0.35000000000000003,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "101",
+        0
+      ],
+      "negative": [
+        "50",
+        0
+      ],
+      "control_net": [
+        "59",
+        0
+      ],
+      "image": [
+        "53",
+        0
+      ],
+      "vae": [
+        "57",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "应用ControlNet（旧版高级）"
+    }
+  },
+  "49": {
+    "inputs": {
+      "text": "%%PROMPT1%%",
+      "clip": [
+        "58",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "50": {
+    "inputs": {
+      "text": "Colorful, Overexposed, Blurred details, Subtitles, Overall gray, Worst quality, Low quality, JPEG compression residue, Ugly, Mutilated, Extra fingers, Badly drawn hands, Badly drawn faces, Deformed, Disfigured, Deformed limbs, Fused fingers, Three legs",
+      "clip": [
+        "58",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "51": {
+    "inputs": {
+      "samples": [
+        "45",
+        0
+      ],
+      "vae": [
+        "57",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "53": {
+    "inputs": {
+      "ckpt_name": "depth_anything_v2_vitl.pth",
+      "resolution": 512,
+      "image": [
+        "32",
+        0
+      ]
+    },
+    "class_type": "DepthAnythingV2Preprocessor",
+    "_meta": {
+      "title": "Depth Anything V2 - Relative"
+    }
+  },
+  "56": {
+    "inputs": {
+      "unet_name": "flux1-dev-Q4_0.gguf"
+    },
+    "class_type": "UnetLoaderGGUF",
+    "_meta": {
+      "title": "Unet Loader (GGUF)"
+    }
+  },
+  "57": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "58": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp8_e4m3fn.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "双CLIP加载器"
+    }
+  },
+  "59": {
+    "inputs": {
+      "type": "depth",
+      "control_net": [
+        "47",
+        0
+      ]
+    },
+    "class_type": "SetUnionControlNetType",
+    "_meta": {
+      "title": "设置UnionControlNet类型"
+    }
+  },
+  "101": {
+    "inputs": {
+      "guidance": 4,
+      "conditioning": [
+        "49",
+        0
+      ]
+    },
+    "class_type": "FluxGuidance",
+    "_meta": {
+      "title": "Flux引导"
+    }
+  },
+  "109": {
+    "inputs": {
+      "channel": "red",
+      "image": [
+        "110",
+        0
+      ]
+    },
+    "class_type": "ImageToMask",
+    "_meta": {
+      "title": "Convert Image to Mask"
+    }
+  },
+  "110": {
+    "inputs": {
+      "image": "%%MASK1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "111": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "51",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  }
+}

@@ -1,0 +1,304 @@
+{
+  "19": {
+    "inputs": {
+      "ckpt_name": "DreamShaperXL_Lightning.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Checkpoint加载器（简易）"
+    }
+  },
+  "33": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "35": {
+    "inputs": {
+      "head": "fooocus_inpaint_head.pth",
+      "patch": "inpaint_v26.fooocus.patch"
+    },
+    "class_type": "INPAINT_LoadFooocusInpaint",
+    "_meta": {
+      "title": "Load Fooocus Inpaint"
+    }
+  },
+  "36": {
+    "inputs": {
+      "model": [
+        "19",
+        0
+      ],
+      "patch": [
+        "35",
+        0
+      ],
+      "latent": [
+        "38",
+        0
+      ]
+    },
+    "class_type": "INPAINT_ApplyFooocusInpaint",
+    "_meta": {
+      "title": "Apply Fooocus Inpaint"
+    }
+  },
+  "38": {
+    "inputs": {
+      "grow_mask_by": 0,
+      "pixels": [
+        "84",
+        0
+      ],
+      "vae": [
+        "19",
+        2
+      ],
+      "mask": [
+        "85",
+        0
+      ]
+    },
+    "class_type": "VAEEncodeForInpaint",
+    "_meta": {
+      "title": "VAE编码（局部重绘）"
+    }
+  },
+  "50": {
+    "inputs": {},
+    "class_type": "Anything Everywhere",
+    "_meta": {
+      "title": "Anything Everywhere"
+    }
+  },
+  "51": {
+    "inputs": {},
+    "class_type": "Anything Everywhere",
+    "_meta": {
+      "title": "Anything Everywhere"
+    }
+  },
+  "54": {
+    "inputs": {},
+    "class_type": "Anything Everywhere",
+    "_meta": {
+      "title": "Anything Everywhere"
+    }
+  },
+  "59": {
+    "inputs": {
+      "text": "text, watermark,(person:1.3),(human,people:2), %%PROMPT1%%",
+      "clip": [
+        "19",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "60": {
+    "inputs": {
+      "text": "%%PROMPT2%%",
+      "clip": [
+        "19",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "62": {
+    "inputs": {
+      "seed": [
+        "63",
+        0
+      ],
+      "steps": 15,
+      "cfg": 8,
+      "sampler_name": "dpmpp_sde",
+      "scheduler": "karras",
+      "denoise": 0.7000000000000001,
+      "preview_method": "auto",
+      "vae_decode": "true",
+      "model": [
+        "36",
+        0
+      ],
+      "positive": [
+        "98",
+        0
+      ],
+      "negative": [
+        "98",
+        1
+      ],
+      "latent_image": [
+        "98",
+        2
+      ],
+      "optional_vae": [
+        "19",
+        2
+      ]
+    },
+    "class_type": "KSampler (Efficient)",
+    "_meta": {
+      "title": "KSampler (Efficient)"
+    }
+  },
+  "63": {
+    "inputs": {
+      "seed": -1
+    },
+    "class_type": "Seed (rgthree)",
+    "_meta": {
+      "title": "Seed (rgthree)"
+    }
+  },
+  "76": {
+    "inputs": {
+      "image": "ImgSender_temp_opzky_00001_.png [temp]",
+      "link_id": 0,
+      "save_to_workflow": false,
+      "image_data": "",
+      "trigger_always": false
+    },
+    "class_type": "ImageReceiver",
+    "_meta": {
+      "title": "原图 Origin"
+    }
+  },
+  "84": {
+    "inputs": {
+      "device_mode": "Prefer GPU",
+      "image": [
+        "33",
+        0
+      ],
+      "mask": [
+        "85",
+        0
+      ]
+    },
+    "class_type": "LaMaInpaint",
+    "_meta": {
+      "title": "LaMa Remove Object"
+    }
+  },
+  "85": {
+    "inputs": {
+      "invert_mask": false,
+      "grow": 10,
+      "blur": 3,
+      "mask": [
+        "103",
+        1
+      ]
+    },
+    "class_type": "LayerMask: MaskGrow",
+    "_meta": {
+      "title": "LayerMask: MaskGrow"
+    }
+  },
+  "98": {
+    "inputs": {
+      "noise_mask": true,
+      "positive": [
+        "60",
+        0
+      ],
+      "negative": [
+        "59",
+        0
+      ],
+      "vae": [
+        "19",
+        2
+      ],
+      "pixels": [
+        "84",
+        0
+      ],
+      "mask": [
+        "85",
+        0
+      ]
+    },
+    "class_type": "InpaintModelConditioning",
+    "_meta": {
+      "title": "内补模型条件"
+    }
+  },
+  "100": {
+    "inputs": {
+      "x": 0,
+      "y": 0,
+      "resize_source": false,
+      "destination": [
+        "33",
+        0
+      ],
+      "source": [
+        "62",
+        5
+      ],
+      "mask": [
+        "85",
+        0
+      ]
+    },
+    "class_type": "ImageCompositeMasked",
+    "_meta": {
+      "title": "合成图像（遮罩）"
+    }
+  },
+  "101": {
+    "inputs": {
+      "model_name": "sam_vit_h (2.56GB)"
+    },
+    "class_type": "SAMModelLoader (segment anything)",
+    "_meta": {
+      "title": "SAMModelLoader (segment anything)"
+    }
+  },
+  "102": {
+    "inputs": {
+      "model_name": "GroundingDINO_SwinB (938MB)"
+    },
+    "class_type": "GroundingDinoModelLoader (segment anything)",
+    "_meta": {
+      "title": "GroundingDinoModelLoader (segment anything)"
+    }
+  },
+  "103": {
+    "inputs": {
+      "prompt": "%%PROMPT1%%",
+      "threshold": 0.1,
+      "sam_model": [
+        "101",
+        0
+      ],
+      "grounding_dino_model": [
+        "102",
+        0
+      ],
+      "image": [
+        "33",
+        0
+      ]
+    },
+    "class_type": "GroundingDinoSAMSegment (segment anything)",
+    "_meta": {
+      "title": "GroundingDinoSAMSegment (segment anything)"
+    }
+  }
+}

@@ -1,0 +1,406 @@
+{
+  "8": {
+    "inputs": {
+      "samples": [
+        "44",
+        0
+      ],
+      "vae": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "10": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "11": {
+    "inputs": {
+      "clip_name1": "t5xxl_fp16.safetensors",
+      "clip_name2": "clip_l.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "双CLIP加载器"
+    }
+  },
+  "12": {
+    "inputs": {
+      "unet_name": "flux1-dev-fp8.safetensors",
+      "weight_dtype": "fp8_e4m3fn"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "38": {
+    "inputs": {
+      "clip_name": "sigclip_vision_patch14_384.safetensors"
+    },
+    "class_type": "CLIPVisionLoader",
+    "_meta": {
+      "title": "加载CLIP视觉"
+    }
+  },
+  "39": {
+    "inputs": {
+      "crop": "center",
+      "clip_vision": [
+        "38",
+        0
+      ],
+      "image": [
+        "40",
+        0
+      ]
+    },
+    "class_type": "CLIPVisionEncode",
+    "_meta": {
+      "title": "CLIP视觉编码"
+    }
+  },
+  "40": {
+    "inputs": {
+      "image": "%%IMAGE2%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "42": {
+    "inputs": {
+      "style_model_name": "flux1-redux-dev.safetensors"
+    },
+    "class_type": "StyleModelLoader",
+    "_meta": {
+      "title": "加载风格模型"
+    }
+  },
+  "44": {
+    "inputs": {
+      "seed": 429631747612010,
+      "steps": 25,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "12",
+        0
+      ],
+      "positive": [
+        "69",
+        0
+      ],
+      "negative": [
+        "69",
+        1
+      ],
+      "latent_image": [
+        "45",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "45": {
+    "inputs": {
+      "width": [
+        "75",
+        0
+      ],
+      "height": [
+        "75",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent图像"
+    }
+  },
+  "48": {
+    "inputs": {
+      "clip_l": "%%PROMPT1%%",
+      "t5xxl": "%%PROMPT1%%",
+      "guidance": 3.5,
+      "clip": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncodeFlux",
+    "_meta": {
+      "title": "CLIP文本编码Flux"
+    }
+  },
+  "50": {
+    "inputs": {
+      "clip_l": "",
+      "t5xxl": "",
+      "guidance": 3.5,
+      "clip": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncodeFlux",
+    "_meta": {
+      "title": "CLIP文本编码Flux"
+    }
+  },
+  "59": {
+    "inputs": {
+      "strength": 0.21,
+      "conditioning": [
+        "48",
+        0
+      ],
+      "style_model": [
+        "42",
+        0
+      ],
+      "clip_vision_output": [
+        "39",
+        0
+      ]
+    },
+    "class_type": "StyleModelApplyAdvanced",
+    "_meta": {
+      "title": "Style Model Apply Advanced"
+    }
+  },
+  "62": {
+    "inputs": {
+      "image": "%%IMAGE1%%",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "63": {
+    "inputs": {
+      "preprocessor": "DepthAnythingV2Preprocessor",
+      "resolution": 512,
+      "image": [
+        "74",
+        0
+      ]
+    },
+    "class_type": "AIO_Preprocessor",
+    "_meta": {
+      "title": "AIO Aux Preprocessor"
+    }
+  },
+  "65": {
+    "inputs": {
+      "control_net_name": "FLUX.1/FLUX.1-dev-ControlNet-Union-Pro/diffusion_pytorch_model.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "加载ControlNet模型"
+    }
+  },
+  "66": {
+    "inputs": {
+      "type": "depth",
+      "control_net": [
+        "65",
+        0
+      ]
+    },
+    "class_type": "SetUnionControlNetType",
+    "_meta": {
+      "title": "设置UnionControlNet类型"
+    }
+  },
+  "69": {
+    "inputs": {
+      "strength": 0.6,
+      "start_percent": 0,
+      "end_percent": 0.6,
+      "positive": [
+        "59",
+        0
+      ],
+      "negative": [
+        "50",
+        0
+      ],
+      "control_net": [
+        "66",
+        0
+      ],
+      "vae": [
+        "10",
+        0
+      ],
+      "image": [
+        "63",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplySD3",
+    "_meta": {
+      "title": "应用ControlNet"
+    }
+  },
+  "73": {
+    "inputs": {
+      "rgthree_comparer": {
+        "images": [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_rxhun_00001_.png&type=temp&subfolder=&rand=0.3333165145295882"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_rxhun_00002_.png&type=temp&subfolder=&rand=0.7868163866451967"
+          }
+        ]
+      },
+      "image_a": [
+        "62",
+        0
+      ],
+      "image_b": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "Image Comparer (rgthree)",
+    "_meta": {
+      "title": "Image Comparer (rgthree)"
+    }
+  },
+  "74": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "width": 1024,
+      "height": 0,
+      "crop": "disabled",
+      "image": [
+        "62",
+        0
+      ]
+    },
+    "class_type": "ImageScale",
+    "_meta": {
+      "title": "缩放图像"
+    }
+  },
+  "75": {
+    "inputs": {
+      "image": [
+        "74",
+        0
+      ]
+    },
+    "class_type": "DF_Get_image_size",
+    "_meta": {
+      "title": "Get image size"
+    }
+  },
+  "83": {
+    "inputs": {
+      "enabled": true,
+      "swap_model": "inswapper_128.onnx",
+      "facedetection": "retinaface_resnet50",
+      "face_restore_model": "none",
+      "face_restore_visibility": 1,
+      "codeformer_weight": 0.5,
+      "detect_gender_input": "no",
+      "detect_gender_source": "no",
+      "input_faces_index": "0",
+      "source_faces_index": "0",
+      "console_log_level": 1,
+      "input_image": [
+        "8",
+        0
+      ],
+      "source_image": [
+        "86",
+        0
+      ]
+    },
+    "class_type": "ReActorFaceSwap",
+    "_meta": {
+      "title": "ReActor 🌌 Fast Face Swap"
+    }
+  },
+  "84": {
+    "inputs": {
+      "image": "微信图片_20240831012935.jpg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "85": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "83",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "86": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "width": 1024,
+      "height": 0,
+      "crop": "disabled",
+      "image": [
+        "84",
+        0
+      ]
+    },
+    "class_type": "ImageScale",
+    "_meta": {
+      "title": "缩放图像"
+    }
+  }
+}
