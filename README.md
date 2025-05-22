@@ -4,7 +4,7 @@ ComfyMind: Toward General-Purpose Generation
 via Tree-Based Planning and Reactive Feedback
 </h1>
 <p align="center">
-    <a href="[Project Page]"> <img alt="Project Page" src="https://litaoguo.github.io/ComfyMind.github.io/"> </a>
+    <a href="[Project Page]"> <img alt="Project Page" src="https://litaoguo.github.io/ComfyMind.github.io"> </a>
     <a href="[arXiv Link]"> <img alt="arXiv Paper" src="https://img.shields.io/badge/arXiv-Paper-red"> </a>
     <a href="[Demo Link]"> <img alt="Demo" src="https://img.shields.io/badge/Demo-Live-orange"> </a>
 </p>
