@@ -26,8 +26,8 @@ We present ComfyMind, a collaborative AI system designed to enable robust and sc
 
 1. Clone the repository, create and activate conda environment:
 ```bash
-git clone [repository-url]
-cd [project-directory]
+git clone https://github.com/LitaoGuo/ComfyMind.git
+cd ComfyMind
 
 conda create -n comfymind python=3.12
 conda activate comfymind
