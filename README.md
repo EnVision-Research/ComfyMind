@@ -72,11 +72,14 @@ python main_gradio.py
 If you find our work helpful, please consider citing our paper:
 
 ```bibtex
-@article{[citation-key],
-  title={[Paper Title]},
-  author={[Author List]},
-  journal={[Journal/arXiv]},
-  year={[Year]}
+@misc{guo2025comfymindgeneralpurposegenerationtreebased,
+      title={ComfyMind: Toward General-Purpose Generation via Tree-Based Planning and Reactive Feedback}, 
+      author={Litao Guo and Xinli Xu and Luozhou Wang and Jiantao Lin and Jinsong Zhou and Zixin Zhang and Bolan Su and Ying-Cong Chen},
+      year={2025},
+      eprint={2505.17908},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2505.17908}, 
 }
 ```
 
