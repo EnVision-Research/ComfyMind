@@ -18,6 +18,7 @@ We present ComfyMind, a collaborative AI system designed to enable robust and sc
 
 ## 📰 News
 
+- **[2025/05/26]** Our online demo will be released in a few days.
 - **[2025/05/24]** Our paper is submitted to arXiv.
 
 ## ️⚙️ Installation
