@@ -5,7 +5,7 @@ via Tree-Based Planning and Reactive Feedback
 </h1>
 <p align="center">
     <a href="https://litaoguo.github.io/ComfyMind.github.io/"> <img alt="Project Page" src="https://img.shields.io/badge/Project-Page-green"> </a>
-    <a href="[arXiv Link]"> <img alt="arXiv Paper" src="https://img.shields.io/badge/arXiv-Paper-red"> </a>
+    <a href="https://arxiv.org/abs/2505.17908"> <img alt="arXiv Paper" src="https://img.shields.io/badge/arXiv-Paper-red"> </a>
     <a href="[Demo Link]"> <img alt="Demo" src="https://img.shields.io/badge/Demo-Live-orange"> </a>
 </p>
 
