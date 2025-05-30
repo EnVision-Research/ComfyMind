@@ -18,7 +18,7 @@ We present ComfyMind, a collaborative AI system designed to enable robust and sc
 
 ## 📰 News
 
-- **[2025/05/30]** Our online demo has been released [https://envision-research.hkust-gz.edu.cn/ComfyMind/](https://envision-research.hkust-gz.edu.cn/ComfyMind/).
+- **[2025/05/30]** Our online demo has been released. [https://envision-research.hkust-gz.edu.cn/ComfyMind/](https://envision-research.hkust-gz.edu.cn/ComfyMind/)
 - **[2025/05/24]** Our paper is submitted to arXiv.
 
 ## ️⚙️ Installation
