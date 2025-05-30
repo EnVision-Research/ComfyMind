@@ -6,7 +6,7 @@ via Tree-Based Planning and Reactive Feedback
 <p align="center">
     <a href="https://litaoguo.github.io/ComfyMind.github.io/"> <img alt="Project Page" src="https://img.shields.io/badge/Project-Page-green"> </a>
     <a href="https://arxiv.org/abs/2505.17908"> <img alt="arXiv Paper" src="https://img.shields.io/badge/arXiv-Paper-red"> </a>
-    <a href="[Demo Link]"> <img alt="Demo" src="https://img.shields.io/badge/Demo-Live-orange"> </a>
+    <a href="https://envision-research.hkust-gz.edu.cn/ComfyMind/"> <img alt="Demo" src="https://img.shields.io/badge/Demo-Live-orange"> </a>
 </p>
 
 ## 💫 Introduction
@@ -18,7 +18,7 @@ We present ComfyMind, a collaborative AI system designed to enable robust and sc
 
 ## 📰 News
 
-- **[2025/05/26]** Our online demo will be released in a few days.
+- **[2025/05/30]** Our online demo has been released [https://envision-research.hkust-gz.edu.cn/ComfyMind/](https://envision-research.hkust-gz.edu.cn/ComfyMind/).
 - **[2025/05/24]** Our paper is submitted to arXiv.
 
 ## ️⚙️ Installation
