@@ -9,6 +9,7 @@ from utils.utils import select_best_tool, functions_call, load_image, read_resul
 from utils.eval_utils import load_video
 from utils.tools import TOOLS
 from utils.eval import check_generation_judgment
+from script.evaluation_geneval import evaluate_geneval_image
 import string
 
 system_prompt_for_prompt_optimization = """
@@ -89,6 +90,7 @@ ATTENTION:
 4. You should pay attention to the timeliness of the user's instructions. For example, The instruction:generate an image with a resolution of XXX or a video with a duration of XXX. Such instructions are permanent. Therefore, it should continue to be passed, and at the same time remind the subsequent workflow to continue to maintain the generated resolution and video time.
 5. *IMPORTANT* You MUST add information and introduction for the new generated file to "file_meta_info"(*Do not* leave it empty).
 6. *IMPORTANT* You MUST maintain ALL Previous step 'file_meta_info' of the previous files(e.g. the image, the video, ...etc.). If the previous files are not mentioned in the 'file_meta_info', you should add them to the 'file_meta_info'. E.g: This image is the original input image for removing the background.
+7. *IMPORTANT* You must measure the gap between the current generated content and the user's target generated content to provide information for subsequent tool calls. For example, the user requires the generation of a green banana, but the banana currently generated is yellow. The color may need to be modified later.
 Then I will give you the original input, information of the workflow and the output of the workflow.
 """
 
@@ -176,7 +178,6 @@ class ComfyMind(object):
                         videos_path.append(resource)
                         file_meta_info[resource] = f'Given Reference Video Input: {input_description}'
 
-
             if self.preprocessing == 'prompt_optimization':
                 messages = [
                     {
@@ -208,7 +209,6 @@ class ComfyMind(object):
                 # Wrap output in <analysis> </analysis>
                 analysis_of_instruction = generation.split('<analysis>')[1].split('</analysis>')[0] if '<analysis>' in generation else None
                 logger.info(f" PreProcessing : Instruction Analysis ".center(80, '-'))
-
 
             input_for_heuristic_search = {
                 "prompt": optimized_prompt if optimized_prompt else instruction,
@@ -384,7 +384,11 @@ class ComfyMind(object):
 
             # Step 3: Execution Agent
             tool_output = None 
-            try:  
+            try:
+                print("Workflow execution process:")
+                print(f"Selected tool: {selected_tool}")
+                print(f"Additional requirements: {additional_requirements}")
+                print(f"Tool input: {tool_input}")
                 tool_output = functions_call(selected_tool, additional_requirements, tool_input)
                 logger.info(f"Workflow Output: {tool_output}")
             except Exception as e:  
@@ -481,17 +485,27 @@ class ComfyMind(object):
 
 
 
-            # Step 4: Planning Agent : Check if the task is completed  
+            # Step 4: Evaluation Agent : Check if the task is completed  
             if Remaining_steps == 0:  
                 logger.info(f"{'Task completed successfully, and waiting for verification ...'.center(80, '-')}")
                 try:
                     if self.eval_agent == 'normal':
+                        print("Evaluation agent process: normal")
                         evaluation, judgment, result_path = check_generation_judgment(tool_output, task)
-                    # elif self.eval_agent == 'geneval':
-                    #     evaluation, judgment, result_path = check_generation_judgment_llm(tool_output, task)
+                    elif self.eval_agent == 'geneval':
+                        print("Evaluation agent process: geneval")
+                        result_json = evaluate_geneval_image(image_path=tool_output['outputs'][0]['images'], metadata=task)
+                        judgment = str(result_json['correct'])
+                        result_path = result_json['filename']
+                        evaluation = f'{result_json["correct"]}:{result_json["reason"]}'
+                        
                     else:
                         # Skip evaluation
                         evaluation, judgment, result_path = check_generation_judgment(tool_output, task, skip_judgment=True)
+                    
+                    print(f"Evaluation: {evaluation}")
+                    print(f"Judgment: {judgment}")
+                    print(f"Result path: {result_path}")
                     
                     if judgment == 'True':
                         cache_entry = {
