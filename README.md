@@ -18,6 +18,8 @@ We present ComfyMind, a collaborative AI system designed to enable robust and sc
 
 ## 📰 News
 
+- **[2025/09/20]** We have released the evaluation code and the results of ComfyMind on evaluation benchmarks.
+- **[2025/09/19]** ComfyMind has been accepted by NeurIPS 2025 🎉🎉🎉
 - **[2025/05/30]** Our online demo has been released. [https://envision-research.hkust-gz.edu.cn/ComfyMind/](https://envision-research.hkust-gz.edu.cn/ComfyMind/)
 - **[2025/05/24]** Our paper is submitted to arXiv.
 
@@ -67,19 +69,23 @@ python main.py \
 python main_gradio.py
 ```
 
+### Evaluation
+The results of ComfyMind on evaluation benchmarks can be viewed via [https://drive.google.com/drive/folders/1pR5vCQoo-W0Tr3vodyfQEWrI3om15Dak?usp=drive_link](https://drive.google.com/drive/folders/1pR5vCQoo-W0Tr3vodyfQEWrI3om15Dak?usp=drive_link).
+
+To run the evaluation for ComfyMind, you can execute the following commands:
+`python Evaluation/eval_geneval.py` , 
+`python Evaluation/eval_reason_edit.py`
+
 ## 📜 Citation
 
 If you find our work helpful, please consider citing our paper:
 
 ```bibtex
-@misc{guo2025comfymindgeneralpurposegenerationtreebased,
-      title={ComfyMind: Toward General-Purpose Generation via Tree-Based Planning and Reactive Feedback}, 
-      author={Litao Guo and Xinli Xu and Luozhou Wang and Jiantao Lin and Jinsong Zhou and Zixin Zhang and Bolan Su and Ying-Cong Chen},
-      year={2025},
-      eprint={2505.17908},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2505.17908}, 
+@article{guo2025comfymind,
+  title={ComfyMind: Toward General-Purpose Generation via Tree-Based Planning and Reactive Feedback},
+  author={Guo, Litao and Xu, Xinli and Wang, Luozhou and Lin, Jiantao and Zhou, Jinsong and Zhang, Zixin and Su, Bolan and Chen, Ying-Cong},
+  journal={arXiv preprint arXiv:2505.17908},
+  year={2025}
 }
 ```
 
